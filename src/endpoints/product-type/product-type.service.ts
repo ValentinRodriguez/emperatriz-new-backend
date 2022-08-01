@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateProductTypeDTO } from './dto/create-product-type.input';
 import { UpdateProductTypeDTO } from './dto/update-product-type.input';
 import { ProductTypeEntity } from './entities/product-type.entity';
-import { Status } from 'src/common/entity/entity';
+import { Status } from '../../common/entity/entity';
 
 @Injectable()
 export class ProductTypeService {

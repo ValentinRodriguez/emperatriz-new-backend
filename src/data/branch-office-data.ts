@@ -1,7 +1,7 @@
 
 export const branchOfficeData: any[] = [
     {
-        descripcion: 'Sucursal Defecto',
-        direccion: 'default branch office',
+        branch_description: 'Sucursal Defecto',
+        branch_addres: 'default branch office',
     }
 ]

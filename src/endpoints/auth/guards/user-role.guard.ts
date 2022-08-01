@@ -1,7 +1,7 @@
 import { Reflector } from '@nestjs/core';
 import { CanActivate, ExecutionContext, Injectable, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { UserEntity } from '../entities/user.entity';
+import { Users } from '../entities/user.entity';
 import { META_ROLES } from '../decorators/role-protected.decorator';
 import { ValidRoles } from '../interfaces';
 
@@ -22,7 +22,7 @@ export class UserRoleGuard implements CanActivate {
     if ( acceptedRoles.length === 0 ) return true;
     
     const req = context.switchToHttp().getRequest();
-    const user = req.user as UserEntity;
+    const user = req.user as Users;
 
     if ( !user ) throw new BadRequestException('User not found');
 

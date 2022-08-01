@@ -2,11 +2,11 @@ import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query }
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationDto } from '../../common/dtos/pagination.dto';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 import { EmployeeCreateDTO } from './dto/create-employee.dto';
 import { EmployeeUpdateDTO } from './dto/update-employee.dto';
 import { EmployeeService } from './employee.service';
-import { EmployeeEntity } from './entities/employee.entity';
+import { Employees } from './entities/employee.entity';
 
 @ApiTags('Employee')
 @Controller('employee')
@@ -15,12 +15,12 @@ export class EmployeeController {
     constructor(private employeeService: EmployeeService) {}
 
     @Post()   
-    @ApiResponse({ status: 201, description: 'Product was created', type: EmployeeEntity  })
+    @ApiResponse({ status: 201, description: 'Product was created', type: Employees  })
     @ApiResponse({ status: 400, description: 'Bad request' })
     @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })    
     create(
         @Body() employee: EmployeeCreateDTO,
-        @GetUser() user: UserEntity
+        @GetUser() user: Users
     ){
         return this.employeeService.create(employee);
     }
@@ -38,7 +38,7 @@ export class EmployeeController {
     @Put(':id')
     update(
         @Param('id', ParseUUIDPipe ) id: string, 
-        @GetUser() user: UserEntity,
+        @GetUser() user: Users,
         @Body() updateEmployee: EmployeeUpdateDTO,
     ){      
         return this.employeeService.update(id, updateEmployee);

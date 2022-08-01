@@ -1,11 +1,11 @@
 import { PaymentConditionService } from './payment-condition.service';
-import { PaymentConditionEntity } from './entities/payment-condition.entity';
+import { PaymentConditions } from './entities/payment-condition.entity';
 import { CreatePaymentConditionDTO } from './dto/create-payment-condition.input';
 import { UpdatePaymentConditionInput } from './dto/update-payment-condition.input';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Products')
@@ -14,12 +14,12 @@ export class PaymentConditionController {
   constructor(private readonly paymentConditionService: PaymentConditionService) {}
 
   @Post()   
-  @ApiResponse({ status: 201, description: 'Product was created', type: PaymentConditionEntity  })
+  @ApiResponse({ status: 201, description: 'Product was created', type: PaymentConditions  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createPaymentCondition(
     @Body() createPaymentConditionInput: CreatePaymentConditionDTO,
-    @GetUser() user: UserEntity
+    @GetUser() user: Users
   ) {
     return this.paymentConditionService.create(createPaymentConditionInput);
   }
@@ -37,7 +37,7 @@ export class PaymentConditionController {
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe ) id: string, 
-    @GetUser() user: UserEntity,
+    @GetUser() user: Users,
     @Body() updatePaymentConditionInput: UpdatePaymentConditionInput
   ) {   
       return this.paymentConditionService.update(id, updatePaymentConditionInput);  

@@ -6,7 +6,7 @@ import { Controller, Post, Body, Get, Param, Put, ParseUUIDPipe, Delete, Query }
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 
 
 @ApiTags('ProductType')
@@ -21,7 +21,7 @@ export class ProductTypeController {
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createProductType(
     @Body() createProductTypeInput: CreateProductTypeDTO,
-    @GetUser() user: UserEntity,) {
+    @GetUser() user: Users,) {
     return this.productTypeService.create(createProductTypeInput);
   }
 
@@ -38,7 +38,7 @@ export class ProductTypeController {
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe ) id: string, 
-    @GetUser() user: UserEntity,
+    @GetUser() user: Users,
     @Body() updateProductTypeDTO: UpdateProductTypeDTO) {
     return this.productTypeService.update(id, updateProductTypeDTO);
   }

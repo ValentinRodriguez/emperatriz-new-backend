@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
 
-import { UserEntity } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { LoginUserDto, CreateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
@@ -16,8 +16,8 @@ export class AuthService {
   private readonly logger = new Logger('AuthService');
   
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(Users)
+    private readonly userRepository: Repository<Users>,
 
     private readonly jwtService: JwtService,
   ) {}
@@ -63,7 +63,7 @@ export class AuthService {
     };
   }
 
-  async checkAuthStatus( user: UserEntity ){
+  async checkAuthStatus( user: Users ){
 
     return {
       ...user,

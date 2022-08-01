@@ -1,4 +1,4 @@
-import { FormEntity } from '../../endpoints/form/entities/form.entity';
+import { Forms } from '../../endpoints/form/entities/form.entity';
 import { getManager } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { formData } from '../../data/form-data';
@@ -10,7 +10,7 @@ export class InputFormCreateSeeder implements Seeder {
         await getManager().query('TRUNCATE forms');
         
         for (const inputForm of inputFOrmData) {
-            await factory(FormEntity)().create(inputForm);
+            await factory(Forms)().create(inputForm);
         }     
     }
 }

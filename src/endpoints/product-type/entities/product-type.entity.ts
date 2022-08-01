@@ -1,4 +1,4 @@
-import { ProductEntity } from '../../../endpoints/products/entities/product.entity';
+import { Products } from '../../../endpoints/products/entities/product.entity';
 import { PrimaryGeneratedColumn, Entity, OneToMany } from 'typeorm';
 import { CreateProductTypeDTO } from '../dto/create-product-type.input';
 
@@ -7,6 +7,6 @@ export class ProductTypeEntity extends CreateProductTypeDTO {
   @PrimaryGeneratedColumn()
   id: string
 
-  @OneToMany(() => ProductEntity, product => product.productType)  
-  products: ProductEntity[];
+  @OneToMany(() => Products, product => product.productType)  
+  products: Products[];
 }

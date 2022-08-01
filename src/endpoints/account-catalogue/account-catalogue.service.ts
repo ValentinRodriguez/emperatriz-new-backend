@@ -5,12 +5,12 @@ import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateAccountCatalogueDTO } from './dto/create-account-catalogue.input';
 import { UpdateAccountCatalogueDTO } from './dto/update-account-catalogue.input';
-import { AccountCatalogueEntity } from './entities/account-catalogue.entity';
+import { AccountCatalogue } from './entities/account-catalogue.entity';
 
 @Injectable()
 export class AccountCatalogueService {
 
-  constructor(@InjectRepository(AccountCatalogueEntity) private catalogueRepository: Repository<AccountCatalogueEntity>) { }
+  constructor(@InjectRepository(AccountCatalogue) private catalogueRepository: Repository<AccountCatalogue>) { }
 
   create(createAccountCatalogueInput: CreateAccountCatalogueDTO) {
     const data = this.catalogueRepository.create(createAccountCatalogueInput);
@@ -50,7 +50,7 @@ export class AccountCatalogueService {
   }
 
   update(id: string, updateAccountCatalogueInput: UpdateAccountCatalogueDTO) {
-    let data:AccountCatalogueEntity = this.catalogueRepository.create(updateAccountCatalogueInput)
+    let data:AccountCatalogue = this.catalogueRepository.create(updateAccountCatalogueInput)
     data.id = id;
     return this.catalogueRepository.save(data);
   }

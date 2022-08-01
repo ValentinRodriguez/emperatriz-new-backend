@@ -1,7 +1,7 @@
 
 import { Factory, Seeder } from 'typeorm-seeding';
 import { usersData } from '../../data/users-data';
-import { UserEntity } from '../../endpoints/auth/entities/user.entity';
+import { Users } from '../../endpoints/auth/entities/user.entity';
 import { getManager } from 'typeorm';
 
 const inputUsersData = usersData
@@ -14,7 +14,7 @@ export class InputUsersCreateSeeder implements Seeder {
         await getManager().query('TRUNCATE users CASCADE');
 
         for (const user of inputUsersData) {
-            await factory(UserEntity)().create(user);
+            await factory(Users)().create(user);
         }  
     }
 }

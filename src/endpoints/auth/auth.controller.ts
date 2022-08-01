@@ -9,7 +9,7 @@ import { RawHeaders, GetUser, IsPublic } from './decorators';
 import { RoleProtected } from './decorators/role-protected.decorator';
 
 import { CreateUserDto, LoginUserDto } from './dto';
-import { UserEntity } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { UserRoleGuard } from './guards/user-role.guard';
 import { ValidRoles } from './interfaces';
 
@@ -33,7 +33,7 @@ export class AuthController {
   @Get('check-status')
    
   checkAuthStatus(
-    @GetUser() user: UserEntity
+    @GetUser() user: Users
   ) {
     return this.authService.checkAuthStatus( user );
   }
@@ -43,7 +43,7 @@ export class AuthController {
   @UseGuards( AuthGuard() )
   testingPrivateRoute(
     @Req() request: Express.Request,
-    @GetUser() user: UserEntity,
+    @GetUser() user: Users,
     @GetUser('email') userEmail: string,
     
     @RawHeaders() rawHeaders: string[],
@@ -68,7 +68,7 @@ export class AuthController {
   @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
   @UseGuards( AuthGuard(), UserRoleGuard )
   privateRoute2(
-    @GetUser() user: UserEntity
+    @GetUser() user: Users
   ) {
 
     return {
@@ -80,7 +80,7 @@ export class AuthController {
 
   @Get('private3')
   privateRoute3(
-    @GetUser() user: UserEntity
+    @GetUser() user: Users
   ) {
 
     return {

@@ -1,5 +1,5 @@
 import { IsString } from 'class-validator';
-import { GlobalEntity } from 'src/common/entity/entity';
+import { GlobalEntity } from '../../../common/entity/entity';
 import { Column } from 'typeorm';
 import { YesNo } from '../../../utils/global-table-enum';
 

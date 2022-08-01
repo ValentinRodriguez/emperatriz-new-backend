@@ -7,7 +7,7 @@ import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { IsPublic, RolHasAccess } from '../auth/decorators';
 import { Product } from '../products/entities';
 import { ValidRoles } from '../auth/interfaces';
-import { AccountCatalogueEntity } from './entities/account-catalogue.entity';
+import { AccountCatalogue } from './entities/account-catalogue.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Account-Catalogue')
@@ -17,7 +17,7 @@ export class AccountCatalogueController {
   constructor(private readonly accountCatalogueService: AccountCatalogueService) {}
   
   @Post()
-  @ApiResponse({ status: 201, description: 'Product was created', type: AccountCatalogueEntity  })
+  @ApiResponse({ status: 201, description: 'Product was created', type: AccountCatalogue  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createAccountCatalogue(@Body() createAccountCatalogueDTO: CreateAccountCatalogueDTO) {

@@ -5,8 +5,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
-import { ProductEntity } from '../products/entities/product.entity';
+import { Users } from '../auth/entities/user.entity';
+import { Products } from '../products/entities/product.entity';
 
 @ApiTags('PurchaseOrder')
 @Controller('purchaseOrder')
@@ -14,7 +14,7 @@ export class PurchaseOrderController {
   constructor(private readonly purchaseOrderService: PurchaseOrderService) {}
 
   @Post()   
-  @ApiResponse({ status: 201, description: 'Product was created', type: ProductEntity  })
+  @ApiResponse({ status: 201, description: 'Product was created', type: Products  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createPurchaseOrder(@Body() createPurchaseOrderInput: CreatePurchaseOrderDTO) {
@@ -34,7 +34,7 @@ export class PurchaseOrderController {
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe ) id: string, 
-    @GetUser() user: UserEntity,
+    @GetUser() user: Users,
     @Body() updatePurchaseOrderDto: UpdatePurchaseOrderInput,
   ) {
     return this.purchaseOrderService.update(id, updatePurchaseOrderDto);

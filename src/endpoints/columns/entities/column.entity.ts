@@ -5,7 +5,7 @@ import { IsString } from 'class-validator';
 import { GlobalEntity } from '../../../common/entity/entity';
 
 @Entity({ name: 'columns' })
-export class ColumnEntity extends GlobalEntity{
+export class Columns extends GlobalEntity{
   @ApiProperty({
     example: 'cd533345-f1f3-48c9-a62e-7dc2da50c8f8',
     description: 'Columb ID',

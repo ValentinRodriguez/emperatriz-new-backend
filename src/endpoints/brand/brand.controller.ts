@@ -1,11 +1,11 @@
 import { BrandService } from './brand.service';
-import { BrandEntity } from './entities/brand.entity';
+import { Brands } from './entities/brand.entity';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Brand')
@@ -15,7 +15,7 @@ export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
   @Post()   
-  @ApiResponse({ status: 201, description: 'Product was created', type: BrandEntity  })
+  @ApiResponse({ status: 201, description: 'Product was created', type: Brands  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createBrand(@Body() createBrandInput: CreateBrandInput) {
@@ -36,7 +36,7 @@ export class BrandController {
   updateBrand(
     @Param('id', ParseUUIDPipe ) id: string, 
     @Body() updateBrandInput: UpdateBrandInput,
-    @GetUser() user: UserEntity) {
+    @GetUser() user: Users) {
     return this.brandService.update(updateBrandInput.id, updateBrandInput);
   }
 

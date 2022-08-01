@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from 'src/common/entity/entity';
+import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateMovementDTO } from './dto/create-movement.input';
 import { UpdateMovementInput } from './dto/update-movement.input';
-import { MovementEntity } from './entities/movement.entity';
+import { Movements } from './entities/movement.entity';
 
 @Injectable()
 export class MovementService {
 
-  constructor(@InjectRepository(MovementEntity) private MovementRepository: Repository<MovementEntity>) { }
+  constructor(@InjectRepository(Movements) private MovementRepository: Repository<Movements>) { }
 
   create(createMovementInput: CreateMovementDTO) {
     const data = this.MovementRepository.create(createMovementInput);
@@ -42,7 +42,7 @@ export class MovementService {
   }
 
   update(id: string, updateMovementInput: UpdateMovementInput) {
-    let data:MovementEntity = this.MovementRepository.create(updateMovementInput)
+    let data:Movements = this.MovementRepository.create(updateMovementInput)
     data.id = id;
     return this.MovementRepository.save(data);
   }

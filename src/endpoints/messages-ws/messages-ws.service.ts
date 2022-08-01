@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Socket } from 'socket.io';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 import { Repository } from 'typeorm';
 
 interface ConnectedClients {
     [id: string]: {
         socket: Socket,
-        user: UserEntity
+        user: Users
     }
 }
 
@@ -18,8 +18,8 @@ export class MessagesWsService {
     private connectedClients: ConnectedClients = {}
 
     constructor(
-        @InjectRepository(UserEntity)
-        private readonly userRepository: Repository<UserEntity>
+        @InjectRepository(Users)
+        private readonly userRepository: Repository<Users>
     ) {}
 
 
@@ -52,7 +52,7 @@ export class MessagesWsService {
     }
 
 
-    private checkUserConnection( user: UserEntity ) {
+    private checkUserConnection( user: Users ) {
 
         for (const clientId of Object.keys( this.connectedClients ) ) {
             

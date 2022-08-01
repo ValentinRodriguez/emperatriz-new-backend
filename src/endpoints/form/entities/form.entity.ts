@@ -3,8 +3,8 @@ import { IsEnum, IsString } from 'class-validator';
 import { GlobalEntity } from '../../../common/entity/entity';
 import { TypeElement } from '../../../utils/global-table-enum';
 
-@Entity('forms')
-export class FormEntity extends GlobalEntity{
+@Entity({ name: 'forms' })
+export class Forms extends GlobalEntity{
 
   @PrimaryGeneratedColumn()
   @IsString()

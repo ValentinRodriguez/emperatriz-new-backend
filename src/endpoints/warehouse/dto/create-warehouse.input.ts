@@ -1,7 +1,7 @@
 
 import { Column } from 'typeorm';
 import { IsString } from 'class-validator';
-import { GlobalEntity } from 'src/common/entity/entity';
+import { GlobalEntity } from '../../../common/entity/entity';
 
 export class CreateWarehouseDTO extends GlobalEntity {
   @IsString()

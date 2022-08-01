@@ -4,12 +4,12 @@ import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateWarehouseDTO } from './dto/create-warehouse.input';
 import { UpdateWarehouseInput } from './dto/update-warehouse.input';
-import { WarehouseEntity } from './entities/warehouse.entity';
+import { Warehouses } from './entities/warehouse.entity';
 
 @Injectable()
 export class WarehouseService {
 
-  constructor(@InjectRepository(WarehouseEntity) private wareHouseRepository: Repository<WarehouseEntity>) { }
+  constructor(@InjectRepository(Warehouses) private wareHouseRepository: Repository<Warehouses>) { }
 
   create(createWarehouseDTO: CreateWarehouseDTO) {
     const data = this.wareHouseRepository.create(createWarehouseDTO); 
@@ -42,7 +42,7 @@ export class WarehouseService {
   }
 
   update(id: string, updateWarehouseInput: UpdateWarehouseInput) {
-    let data:WarehouseEntity = this.wareHouseRepository.create(updateWarehouseInput)
+    let data:Warehouses = this.wareHouseRepository.create(updateWarehouseInput)
     data.id = id;
     return this.wareHouseRepository.save(data);
   }

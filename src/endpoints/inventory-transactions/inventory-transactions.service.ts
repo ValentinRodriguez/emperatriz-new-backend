@@ -1,17 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from 'src/common/entity/entity';
+import { Status } from '../../common/entity/entity';
 
 import { Repository } from 'typeorm';
 
 import { CreateInventoryTransactionDTO } from './dto/create-inventory-transaction.input';
 import { UpdateInventoryTransactionDTO } from './dto/update-inventory-transaction.input';
-import { InventoryTransactionEntity } from './entities/inventory-transaction.entity';
+import { InventoryTransactions } from './entities/inventory-transaction.entity';
 
 @Injectable()
 export class InventoryTransactionsService {
 
-  constructor(@InjectRepository(InventoryTransactionEntity) private inventoryTransactionRepository: Repository<InventoryTransactionEntity>) { }
+  constructor(@InjectRepository(InventoryTransactions) private inventoryTransactionRepository: Repository<InventoryTransactions>) { }
 
   create(createInventoryTransactionInput: CreateInventoryTransactionDTO) {
     const data = this.inventoryTransactionRepository.create(createInventoryTransactionInput);
@@ -33,7 +33,7 @@ export class InventoryTransactionsService {
   }
 
   update(id:string, updateInventoryTransactionInput: UpdateInventoryTransactionDTO) {
-    let data:InventoryTransactionEntity = this.inventoryTransactionRepository.create(updateInventoryTransactionInput)
+    let data:InventoryTransactions = this.inventoryTransactionRepository.create(updateInventoryTransactionInput)
     data.id = id;
     console.log(data);    
     return this.inventoryTransactionRepository.save(data);    

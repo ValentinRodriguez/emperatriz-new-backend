@@ -3,8 +3,8 @@ import { Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { CreatePaymentConditionDTO } from '../dto/create-payment-condition.input';
 
 
-@Entity()
-export class PaymentConditionEntity extends CreatePaymentConditionDTO {
+@Entity({ name: 'payment_conditions' })
+export class PaymentConditions extends CreatePaymentConditionDTO {
   @IsString()
   @PrimaryGeneratedColumn()
   id: string;

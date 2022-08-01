@@ -2,15 +2,15 @@ import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne, OneToMany, Prima
 import { ApiProperty } from '@nestjs/swagger';
 
 import { ProductImage } from './';
-import { UserEntity } from '../../auth/entities/user.entity';
+import { Users } from '../../auth/entities/user.entity';
 import { GlobalEntity } from '../../../common/entity/entity';
-import { BrandEntity } from 'src/endpoints/brand/entities/brand.entity';
-import { CategoryEntity } from 'src/endpoints/category/entities/category.entity';
-import { WarehouseEntity } from 'src/endpoints/warehouse/entities/warehouse.entity';
-import { ProductTypeEntity } from 'src/endpoints/product-type/entities/product-type.entity';
+import { Brands } from '../../../endpoints/brand/entities/brand.entity';
+import { Category } from '../../../endpoints/category/entities/category.entity';
+import { Warehouses } from '../../../endpoints/warehouse/entities/warehouse.entity';
+import { ProductTypeEntity } from '../../../endpoints/product-type/entities/product-type.entity';
 
 @Entity({ name: 'products' })
-export class ProductEntity extends GlobalEntity{
+export class Products extends GlobalEntity{
 
     @ApiProperty({
         example: 'cd533345-f1f3-48c9-a62e-7dc2da50c8f8',
@@ -98,17 +98,17 @@ export class ProductEntity extends GlobalEntity{
     @OneToMany( () => ProductImage, (productImage) => productImage.product, { cascade: true, eager: true })
     images?: ProductImage[];
 
-    @ManyToOne(() => UserEntity, ( user ) => user.product,{ eager: true } )
-    user: UserEntity
+    @ManyToOne(() => Users, ( user ) => user.product,{ eager: true } )
+    user: Users
 
-    @ManyToOne(()=> BrandEntity, brand => brand.products,{ eager: true })
-    brand: BrandEntity;
+    @ManyToOne(()=> Brands, brand => brand.products,{ eager: true })
+    brand: Brands;
 
-    @ManyToOne(()=> CategoryEntity, category => category.products,{ eager: true })
-    category: BrandEntity;
+    @ManyToOne(()=> Category, category => category.products,{ eager: true })
+    category: Brands;
 
-    @ManyToOne(()=> WarehouseEntity, warehouse => warehouse.products,{ eager: true })
-    warehouse: WarehouseEntity;
+    @ManyToOne(()=> Warehouses, warehouse => warehouse.products,{ eager: true })
+    warehouse: Warehouses;
 
     @ManyToOne(()=> ProductTypeEntity, prodctType => prodctType.products,{ eager: true })
     productType: ProductTypeEntity;

@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCurrencyDTO } from './dto/create-currency.input';
 import { UpdateCurrencyInput } from './dto/update-currency.input';
-import { CurrencyEntity } from './entities/currency.entity';
+import { Currencies } from './entities/currency.entity';
 
 @Injectable()
 export class CurrencyService {
 
-  constructor(@InjectRepository(CurrencyEntity) private currencyRepository: Repository<CurrencyEntity>) { }
+  constructor(@InjectRepository(Currencies) private currencyRepository: Repository<Currencies>) { }
 
   create(createCurrencyDTO: CreateCurrencyDTO) {
     const data = this.currencyRepository.create(createCurrencyDTO);
@@ -30,7 +30,7 @@ export class CurrencyService {
   }
 
   update(id: string, updateCurrencyInput: UpdateCurrencyInput) {
-    let data:CurrencyEntity = this.currencyRepository.create(updateCurrencyInput)
+    let data:Currencies = this.currencyRepository.create(updateCurrencyInput)
     data.id = id;
     return this.currencyRepository.save(data);
   }

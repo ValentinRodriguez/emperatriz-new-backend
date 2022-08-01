@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { ColumnsService } from './columns.service';
 import { ColumnsResolver } from './columns.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ColumnEntity } from './entities/column.entity';
+import { Columns } from './entities/column.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ColumnEntity])
+    TypeOrmModule.forFeature([Columns])
   ],	
   providers: [ColumnsResolver, ColumnsService]
 })

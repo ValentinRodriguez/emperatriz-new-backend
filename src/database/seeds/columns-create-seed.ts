@@ -1,5 +1,5 @@
 
-import { ColumnEntity } from '../../endpoints/columns/entities/column.entity';
+import { Columns } from '../../endpoints/columns/entities/column.entity';
 import { getManager } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { columnData } from '../../data/column-data';
@@ -11,7 +11,7 @@ export class InputColumnCreateSeeder implements Seeder {
         await getManager().query('TRUNCATE columns');
         
         for (const inputColumns of inputColumnData) {
-            await factory(ColumnEntity)().create(inputColumns);
+            await factory(Columns)().create(inputColumns);
         }     
     }
 }

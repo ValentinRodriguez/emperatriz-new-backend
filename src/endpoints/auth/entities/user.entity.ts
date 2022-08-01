@@ -4,7 +4,7 @@ import { GlobalEntity } from '../../../common/entity/entity';
 import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'users' })
-export class UserEntity extends GlobalEntity{
+export class Users extends GlobalEntity{
     
     @PrimaryGeneratedColumn('uuid')
     id: string;

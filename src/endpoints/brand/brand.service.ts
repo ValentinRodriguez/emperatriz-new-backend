@@ -4,12 +4,12 @@ import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
-import { BrandEntity } from './entities/brand.entity';
+import { Brands } from './entities/brand.entity';
 
 @Injectable()
 export class BrandService {
 
-  constructor(@InjectRepository(BrandEntity) private brandRepository: Repository<BrandEntity>) { }
+  constructor(@InjectRepository(Brands) private brandRepository: Repository<Brands>) { }
 
   create(createBrandInput: CreateBrandInput) {
     const data = this.brandRepository.create(createBrandInput);
@@ -42,7 +42,7 @@ export class BrandService {
   }
 
   update(id: string, updateBrandInput: UpdateBrandInput) {
-    let data:BrandEntity = this.brandRepository.create(updateBrandInput)
+    let data:Brands = this.brandRepository.create(updateBrandInput)
     data.id = id;
     return this.brandRepository.save(data);
   }

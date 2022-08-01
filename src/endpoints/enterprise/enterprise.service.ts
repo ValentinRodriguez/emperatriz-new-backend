@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateEnterpriseDTO } from './dto/create-enterprise.input';
 import { UpdateEnterpriseInput } from './dto/update-enterprise.input';
-import { EnterpriseEntity } from './entities/enterprise.entity';
+import { Enterprises } from './entities/enterprise.entity';
 
 @Injectable()
 export class EnterpriseService {
 
-  constructor(@InjectRepository(EnterpriseEntity) private enterpriseRepository: Repository<EnterpriseEntity>) { }
+  constructor(@InjectRepository(Enterprises) private enterpriseRepository: Repository<Enterprises>) { }
 
   create(enterpriseRepository: CreateEnterpriseDTO) {
     const data = this.enterpriseRepository.create(enterpriseRepository);

@@ -4,12 +4,12 @@ import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateCategoryDTO } from './dto/create-category.input';
 import { UpdateCategoryDTO } from './dto/update-category.input';
-import { CategoryEntity } from './entities/category.entity';
+import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
 
-  constructor(@InjectRepository(CategoryEntity) private categoryRepository: Repository<CategoryEntity>) { }
+  constructor(@InjectRepository(Category) private categoryRepository: Repository<Category>) { }
 
   create(createCategoryInput: CreateCategoryDTO) {
     console.log(createCategoryInput);    
@@ -43,7 +43,7 @@ export class CategoryService {
   }
 
   update(id: string, updateCategoryInput: UpdateCategoryDTO) {
-    let data:CategoryEntity = this.categoryRepository.create(updateCategoryInput)
+    let data:Category = this.categoryRepository.create(updateCategoryInput)
     data.id = id;
     console.log(data);    
     return this.categoryRepository.save(data);   

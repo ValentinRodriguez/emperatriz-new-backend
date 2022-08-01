@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from 'src/common/entity/entity';
+import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreatePurchaseOrderDTO } from './dto/create-purchase-order.input';
 import { UpdatePurchaseOrderInput } from './dto/update-purchase-order.input';
-import { PurchaseOrderEntity } from './entities/purchase-order.entity';
+import { PurchaseOrders } from './entities/purchase-order.entity';
 
 @Injectable()
 export class PurchaseOrderService {
 
-  constructor(@InjectRepository(PurchaseOrderEntity) private PurchaseOrderEntityRepository: Repository<PurchaseOrderEntity>) { }
+  constructor(@InjectRepository(PurchaseOrders) private PurchaseOrderEntityRepository: Repository<PurchaseOrders>) { }
 
   create(createPurchaseOrderInput: CreatePurchaseOrderDTO) {    
     const purchaseOrder = this.PurchaseOrderEntityRepository.create(createPurchaseOrderInput);
@@ -33,7 +33,7 @@ export class PurchaseOrderService {
   }
 
   update(id: string, updatePurchaseOrderInput: UpdatePurchaseOrderInput) {
-    let data:PurchaseOrderEntity = this.PurchaseOrderEntityRepository.create(updatePurchaseOrderInput)
+    let data:PurchaseOrders = this.PurchaseOrderEntityRepository.create(updatePurchaseOrderInput)
     data.id = id;
     return this.PurchaseOrderEntityRepository.save(data);
   }

@@ -1,15 +1,15 @@
 import { OneToMany, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { CreateWarehouseDTO } from '../dto/create-warehouse.input';
 import { IsString } from 'class-validator';
-import { ProductEntity } from 'src/endpoints/products/entities/product.entity';
+import { Products } from '../../../endpoints/products/entities/product.entity';
 
-@Entity()
-export class WarehouseEntity extends CreateWarehouseDTO {
+@Entity({ name: 'warehouses' })
+export class Warehouses extends CreateWarehouseDTO {
   @Column()
   @IsString()
   @PrimaryGeneratedColumn()
   id: string;
 
-  @OneToMany(() => ProductEntity, product => product.warehouse)
-  products: ProductEntity[];
+  @OneToMany(() => Products, product => product.warehouse)
+  products: Products[];
 }

@@ -8,7 +8,7 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 import { validate as isUUID } from 'uuid';
 import { ProductImage, Product } from './entities';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 
 @Injectable()
 export class ProductsService {
@@ -29,7 +29,7 @@ export class ProductsService {
 
 
 
-  async create(createProductDto: CreateProductDto, user: UserEntity) {
+  async create(createProductDto: CreateProductDto, user: Users) {
     
     try {
       const { images = [], ...productDetails } = createProductDto;
@@ -102,7 +102,7 @@ export class ProductsService {
     }
   }
 
-  async update( id: string, updateProductDto: UpdateProductDto, user: UserEntity ) {
+  async update( id: string, updateProductDto: UpdateProductDto, user: Users ) {
 
     const { images, ...toUpdate } = updateProductDto;
 

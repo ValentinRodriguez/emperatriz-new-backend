@@ -1,11 +1,11 @@
 import { CategoryService } from './category.service';
-import { CategoryEntity } from './entities/category.entity';
+import { Category } from './entities/category.entity';
 import { CreateCategoryDTO } from './dto/create-category.input';
 import { UpdateCategoryDTO } from './dto/update-category.input';
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GetUser } from '../auth/decorators';
-import { UserEntity } from '../auth/entities/user.entity';
+import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Category')
@@ -14,12 +14,12 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()   
-  @ApiResponse({ status: 201, description: 'Product was created', type: CategoryEntity  })
+  @ApiResponse({ status: 201, description: 'Product was created', type: Category  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createCategory(
     @Body() createCategoryInput: CreateCategoryDTO,
-    @GetUser() user: UserEntity,) {
+    @GetUser() user: Users,) {
     console.log(createCategoryInput); 
     return this.categoryService.create(createCategoryInput);
   }
@@ -37,7 +37,7 @@ export class CategoryController {
   @Put(':id')
   updateCategory(
     @Param('id', ParseUUIDPipe ) id: string, 
-    @GetUser() user: UserEntity,
+    @GetUser() user: Users,
     @Body() updateCategoryInput: UpdateCategoryDTO,
   ) {
     console.log(updateCategoryInput);    

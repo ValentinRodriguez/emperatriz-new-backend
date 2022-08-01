@@ -1,7 +1,7 @@
-import { ColumnEntity } from '../../endpoints/columns/entities/column.entity';
+import { Columns } from '../../endpoints/columns/entities/column.entity';
 import { define } from 'typeorm-seeding';
 
-define(ColumnEntity, () => {
-  const columns = new ColumnEntity();
+define(Columns, () => {
+  const columns = new Columns();
   return columns;
 });

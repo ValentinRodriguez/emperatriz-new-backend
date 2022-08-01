@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from 'src/common/entity/entity';
+import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreatePaymentConditionDTO } from './dto/create-payment-condition.input';
 import { UpdatePaymentConditionInput } from './dto/update-payment-condition.input';
-import { PaymentConditionEntity } from './entities/payment-condition.entity';
+import { PaymentConditions } from './entities/payment-condition.entity';
 
 @Injectable()
 export class PaymentConditionService {
 
-  constructor(@InjectRepository(PaymentConditionEntity) private PaymentConditionRepository: Repository<PaymentConditionEntity>) { }
+  constructor(@InjectRepository(PaymentConditions) private PaymentConditionRepository: Repository<PaymentConditions>) { }
 
   create(createPaymentConditionInput: CreatePaymentConditionDTO) {
 
@@ -44,7 +44,7 @@ export class PaymentConditionService {
   }
 
    update(id: string, updatePaymentConditionInput: UpdatePaymentConditionInput) {
-    let data:PaymentConditionEntity = this.PaymentConditionRepository.create(updatePaymentConditionInput)
+    let data:PaymentConditions = this.PaymentConditionRepository.create(updatePaymentConditionInput)
     data.id = id;
     return this.PaymentConditionRepository.save(data);
   }
