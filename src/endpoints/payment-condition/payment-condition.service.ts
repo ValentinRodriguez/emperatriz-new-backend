@@ -5,25 +5,20 @@ import { Repository } from 'typeorm';
 import { CreatePaymentConditionDTO } from './dto/create-payment-condition.input';
 import { UpdatePaymentConditionInput } from './dto/update-payment-condition.input';
 import { PaymentConditions } from './entities/payment-condition.entity';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { ResponseAPI } from 'src/common/response/response';
+import { Crud } from 'src/common/crud';
 
 @Injectable()
-export class PaymentConditionService {
+export class PaymentConditionService extends Crud {
 
-  constructor(@InjectRepository(PaymentConditions) private PaymentConditionRepository: Repository<PaymentConditions>) { }
-
-  create(createPaymentConditionInput: CreatePaymentConditionDTO) {
-
-    const movement = this.PaymentConditionRepository.create(createPaymentConditionInput);
-    return this.PaymentConditionRepository.save(movement);
+  constructor(@InjectRepository(PaymentConditions) private PaymentConditionRepository: Repository<PaymentConditions>) {
+    super(PaymentConditionRepository);
   }
 
-  findAll() {
-
-    return this.PaymentConditionRepository.find({
-      where: {
-        status: Status.Active
-      }
-    })
+  create(createPaymentConditionInput: CreatePaymentConditionDTO) {
+    const movement = this.PaymentConditionRepository.create(createPaymentConditionInput);
+    return this.PaymentConditionRepository.save(movement);
   }
 
   findOne(id:string) {

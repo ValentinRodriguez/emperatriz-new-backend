@@ -30,12 +30,17 @@ export class AuthController {
     return this.authService.login( loginUserDto );
   }
 
-  @Get('check-status')
-   
+  @Get('check-status')   
   checkAuthStatus(
     @GetUser() user: Users
   ) {
     return this.authService.checkAuthStatus( user );
+  }
+
+  
+  @Get()  
+  findAll() {
+    return this.authService.findAll();
   }
 
 

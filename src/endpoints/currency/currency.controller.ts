@@ -6,7 +6,6 @@ import { Body, Controller, Post, Put, Param, ParseUUIDPipe, Delete, Query, Get }
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Currency')
 @Controller('currency')
@@ -25,7 +24,7 @@ export class CurrencyController {
   }
 
   @Get()
-  findAll( @Query() paginationDto:PaginationDto ) {
+  findAll() {
     return this.currencyService.findAll();
   }
 

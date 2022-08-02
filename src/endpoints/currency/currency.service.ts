@@ -1,24 +1,22 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Crud } from 'src/common/crud';
+import { Status } from 'src/common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateCurrencyDTO } from './dto/create-currency.input';
 import { UpdateCurrencyInput } from './dto/update-currency.input';
 import { Currencies } from './entities/currency.entity';
 
 @Injectable()
-export class CurrencyService {
+export class CurrencyService extends Crud{
 
-  constructor(@InjectRepository(Currencies) private currencyRepository: Repository<Currencies>) { }
+  constructor(@InjectRepository(Currencies) private currencyRepository: Repository<Currencies>) {
+    super(currencyRepository);
+  }
 
   create(createCurrencyDTO: CreateCurrencyDTO) {
     const data = this.currencyRepository.create(createCurrencyDTO);
     return this.currencyRepository.save(data);
-  }
-
-  findAll() {
-    // return this.currencyRepository.find({
-    //   where: { status: Status.Active }
-    // });
   }
 
   findOne(id: string) {

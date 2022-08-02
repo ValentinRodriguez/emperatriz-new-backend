@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ResponseAPI } from 'src/common/response/response';
 import { Repository } from 'typeorm';
 import { CreateFormDTO } from './dto/create-form.input';
 import { Forms } from './entities/form.entity';
@@ -17,7 +18,12 @@ export class FormService {
     return this.formRepository.findBy({form});  
   }
 
-  async findAll(): Promise<Forms[]> {
-    return this.formRepository.find();  
+  async findAll(): Promise<ResponseAPI> {
+    try {
+      const data = new ResponseAPI(200, 'Success', await this.formRepository.find());
+      return data;        
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }

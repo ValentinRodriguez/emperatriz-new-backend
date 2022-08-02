@@ -17,6 +17,11 @@ async function bootstrap() {
     })
   );
 
+  app.enableCors({
+    origin: "http://localhost:4200",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+  });
+  
   const config = new DocumentBuilder()
     .setTitle('Teslo RESTFul API')
     .setDescription('Teslo shop endpoints')

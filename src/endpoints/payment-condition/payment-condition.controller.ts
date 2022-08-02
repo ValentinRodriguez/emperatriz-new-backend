@@ -8,8 +8,8 @@ import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
-@ApiTags('Products')
-@Controller('products')
+@ApiTags('PaymentCondition')
+@Controller('payment-condition')
 export class PaymentConditionController {
   constructor(private readonly paymentConditionService: PaymentConditionService) {}
 
@@ -26,7 +26,7 @@ export class PaymentConditionController {
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.paymentConditionService.findAll();
+    return this.paymentConditionService.findAll(paginationDto);
   }
 
   @Get(':term')

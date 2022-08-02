@@ -28,7 +28,7 @@ export enum StateToFilter {
     ProductType = 'productType.ProductTypes',
     Product = 'productos.Products',
     Provider = 'provider.Providers',
-    Warehouse = 'wareHouse.Warehouses',
+    Warehouse = 'wareHouse.WareHouses',
     Movement = 'movement.Movements',
     PaymentsCondition = 'paymentCondition.PaymentsCondition',
     User = 'user.Users',

@@ -1,9 +1,8 @@
 import { FormService } from './form.service';
 import { CreateFormDTO } from './dto/create-form.input';
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Forms } from './entities/form.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Forms')
 @Controller('forms')
@@ -24,7 +23,7 @@ export class FormController {
   }
 
   @Get()
-  findAll( @Query() paginationDto:PaginationDto ) {
+  findAll() {
     return this.formService.findAll();
   }
 }

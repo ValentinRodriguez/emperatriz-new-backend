@@ -8,7 +8,7 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Columns')
 @Controller('columns')
-export class ColumnsResolver {
+export class ColumnsController {
   constructor(private readonly columnsService: ColumnsService) {}
 
   @Post()   
@@ -21,7 +21,7 @@ export class ColumnsResolver {
   }
 
   @Get()
-  findAll( @Query() paginationDto:PaginationDto ) {
+  findAll() {
     return this.columnsService.findAll();
   }
 

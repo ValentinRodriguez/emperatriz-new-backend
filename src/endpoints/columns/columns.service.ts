@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ResponseAPI } from 'src/common/response/response';
 import { Repository } from 'typeorm';
 import { CreateColumnInput } from './dto/create-column.input';
 import { Columns } from './entities/column.entity';
@@ -17,7 +18,12 @@ export class ColumnsService {
     return this.columnRepository.findBy({ form });
   }
 
-  findAll(): Promise<Columns[]> {
-    return this.columnRepository.find();
+  async findAll(): Promise<ResponseAPI> {
+    try {
+      const data = new ResponseAPI(200, 'Success', await this.columnRepository.find());
+      return data;        
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }

@@ -8,20 +8,21 @@ import * as bcrypt from 'bcrypt';
 import { Users } from './entities/user.entity';
 import { LoginUserDto, CreateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { Crud } from 'src/common/crud';
 
 
 @Injectable()
-export class AuthService {
+export class AuthService extends Crud{
 
   private readonly logger = new Logger('AuthService');
   
   constructor(
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
-
     private readonly jwtService: JwtService,
-  ) {}
-
+  ) {
+    super(userRepository);
+  }
 
   async create( createUserDto: CreateUserDto) {
     
