@@ -32,17 +32,17 @@ export class ProductsService {
   async create(createProductDto: CreateProductDto, user: Users) {
     
     try {
-      const { images = [], ...productDetails } = createProductDto;
+      const { imagesId = [], ...productDetails } = createProductDto;
 
       const product = this.productRepository.create({
         ...productDetails,
-        images: images.map( image => this.productImageRepository.create({ url: image }) ),
+        images: imagesId.map( image => this.productImageRepository.create({ url: image }) ),
         user,
       });
       
       await this.productRepository.save( product );
 
-      return { ...product, images };
+      return { ...product, imagesId };
       
     } catch (error) {
       this.handleDBExceptions(error);
@@ -75,7 +75,7 @@ export class ProductsService {
     let product: Product;
 
     if ( isUUID(term) ) {
-      product = await this.productRepository.findOneBy({ id: term });
+      // product = await this.productRepository.findOneBy({ id: term });
     } else {
       const queryBuilder = this.productRepository.createQueryBuilder('prod'); 
       product = await queryBuilder
@@ -104,7 +104,7 @@ export class ProductsService {
 
   async update( id: string, updateProductDto: UpdateProductDto, user: Users ) {
 
-    const { images, ...toUpdate } = updateProductDto;
+    const { imagesId, ...toUpdate } = updateProductDto;
 
 
     const product = await this.productRepository.preload({ id, ...toUpdate });
@@ -118,10 +118,10 @@ export class ProductsService {
 
     try {
 
-      if( images ) {
+      if( imagesId ) {
         await queryRunner.manager.delete( ProductImage, { product: { id } });
 
-        product.images = images.map( 
+        product.images = imagesId.map( 
           image => this.productImageRepository.create({ url: image }) 
         )
       }
@@ -179,3 +179,4 @@ export class ProductsService {
   }
 
 }
+

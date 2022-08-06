@@ -5,7 +5,7 @@ import { CreateBranchOfficeDTO } from '../dto/create-branch-office.input';
 @Entity({ name: 'branch_office' })
 export class BranchOffice extends CreateBranchOfficeDTO{
   @Column()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
   
   @ManyToOne(()=> Enterprises, enterprise => enterprise.branchs)

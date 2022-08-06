@@ -8,7 +8,7 @@ export class Category extends CreateCategoryDTO{
 
   @Column()
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
   
   @OneToMany(() => Products, product => product.category)  

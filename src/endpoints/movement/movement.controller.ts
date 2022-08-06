@@ -8,8 +8,8 @@ import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
-@ApiTags('Products')
-@Controller('products')
+@ApiTags('Movements')
+@Controller('movements')
 export class MovementController {
   constructor(private readonly movementService: MovementService) {}
 

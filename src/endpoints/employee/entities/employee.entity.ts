@@ -3,7 +3,7 @@ import { EmployeeCreateDTO } from "../dto/create-employee.dto"
 
 @Entity({ name: "employees" })
 export class Employees extends EmployeeCreateDTO{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string
 
 }

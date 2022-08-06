@@ -3,6 +3,6 @@ import { CreateClientDTO } from '../dto/create-client.input';
 
 @Entity( {name:'clients'} )
 export class Clients extends CreateClientDTO{
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 }

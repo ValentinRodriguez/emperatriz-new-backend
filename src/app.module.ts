@@ -8,7 +8,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { CommonModule } from './common/common.module';
 
 import { ProductsModule } from './endpoints/products/products.module';
-import { SeedModule } from './endpoints/seed/seed.module';
 import { FilesModule } from './endpoints/files/files.module';
 import { AuthModule } from './endpoints/auth/auth.module';
 import { MessagesWsModule } from './endpoints/messages-ws/messages-ws.module';
@@ -65,16 +64,15 @@ import { WarehouseModule } from './endpoints/warehouse/warehouse.module';
     ProductTypeModule,
     ProductsModule,
     ProviderModule,
-    PurchaseOrderModule,
-    SeedModule,
+    PurchaseOrderModule,   
     CommonModule,
     WarehouseModule
   ],
   providers: [
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: IsAuthenticatedGuard
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: IsAuthenticatedGuard
+    },
     // {
     //   provide: APP_GUARD,
     //   useClass: UserRoleGuard

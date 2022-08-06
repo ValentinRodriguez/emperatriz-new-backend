@@ -5,7 +5,7 @@ import { CreateEnterpriseDTO } from '../dto/create-enterprise.input';
 @Entity({ name: 'enterprises' })
 export class Enterprises extends CreateEnterpriseDTO{
   @Column()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @OneToMany(() => BranchOffice, branch => branch.enterprise, { cascade: true, eager: true })

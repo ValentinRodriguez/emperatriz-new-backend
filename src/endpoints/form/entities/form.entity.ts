@@ -6,7 +6,7 @@ import { TypeElement } from '../../../utils/global-table-enum';
 @Entity({ name: 'forms' })
 export class Forms extends GlobalEntity{
 
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @IsString()
   id: string
 

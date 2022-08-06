@@ -1,9 +1,9 @@
 import { Column } from 'typeorm';
-import { IsString } from 'class-validator';
 import { GlobalEntity } from '../../../common/entity/entity';
+import { IsGlobalString } from '../../../endpoints/auth/decorators';
 
 export class CreateBrandInput extends GlobalEntity {
-  @IsString()
+  @IsGlobalString({ minLength: 1 })
   @Column()
-  title_brand: string;
+  title: string;
 }

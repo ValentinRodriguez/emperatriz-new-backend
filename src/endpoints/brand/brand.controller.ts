@@ -8,8 +8,8 @@ import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
-@ApiTags('Brand')
-@Controller('brand')
+@ApiTags('Brands')
+@Controller('brands')
 export class BrandController {
   
   constructor(private readonly brandService: BrandService) {}
@@ -18,30 +18,32 @@ export class BrandController {
   @ApiResponse({ status: 201, description: 'Product was created', type: Brands  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
-  createBrand(@Body() createBrandInput: CreateBrandInput) {
-    return this.brandService.create(createBrandInput);
+  createBrand(
+    @Body() createBrandInput: CreateBrandInput,
+    @GetUser() user:Users) {
+    return this.brandService.createRegister(createBrandInput, user);
   }
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.brandService.findAll();
+    return this.brandService.findAll(paginationDto);
   }
 
   @Get(':term')
-  findOne(@Param( 'term' ) term: string) {
-    return this.brandService.findOne(term);
+  findOne(@Param( 'term' ) term: string) {    
+    return this.brandService.findRegisters(term);
   }
 
   @Put(':id')
   updateBrand(
     @Param('id', ParseUUIDPipe ) id: string, 
     @Body() updateBrandInput: UpdateBrandInput,
-    @GetUser() user: Users) {
-    return this.brandService.update(updateBrandInput.id, updateBrandInput);
+    @GetUser() user:Users) {
+    return this.brandService.updateRegister(id, updateBrandInput, user);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe ) id: string) {
-    return this.brandService.remove(id);
+  remove(@Param('id', ParseUUIDPipe ) id: string, @GetUser() user:Users) {
+    return this.brandService.removeRegister(id, user);
   }
 }

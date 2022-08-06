@@ -9,6 +9,6 @@ export class AccountCatalogue extends CreateAccountCatalogueDTO{
     description: 'Columb ID',
     uniqueItems: true
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 }

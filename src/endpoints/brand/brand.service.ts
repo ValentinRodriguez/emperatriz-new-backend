@@ -1,63 +1,18 @@
+import { Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from '../../common/entity/entity';
-import { Repository } from 'typeorm';
-import { CreateBrandInput } from './dto/create-brand.input';
-import { UpdateBrandInput } from './dto/update-brand.input';
 import { Brands } from './entities/brand.entity';
+import { Crud } from 'src/common/crud';
+import { Status } from 'src/common/entity/entity';
 
 @Injectable()
-export class BrandService {
+export class BrandService extends Crud{
 
-  constructor(@InjectRepository(Brands) private brandRepository: Repository<Brands>) { }
-
-  create(createBrandInput: CreateBrandInput) {
-    const data = this.brandRepository.create(createBrandInput);
-    return this.brandRepository.save(data);
+  constructor(@InjectRepository(Brands) private brandRepository: Repository<Brands>) {
+    super(brandRepository, ['product']);
   }
 
-  findAll() {
-    return this.brandRepository.find({
-      relations: ['products'],
-      where: { status: Status.Active }
-    });
-  }
 
-  findOne(id: string) {
-    // return this.brandRepository.findOne(id, {
-    //   relations: ['products'],
-    //   where: {
-    //     status: Status.Active
-    //   }
-    // });
-  }
 
-  SearchOneBrandByName(title_brand: string) {
-    return this.brandRepository.find({
-      where: {
-        status: Status.Active,
-        title_brand: title_brand
-      }
-    });
-  }
 
-  update(id: string, updateBrandInput: UpdateBrandInput) {
-    let data:Brands = this.brandRepository.create(updateBrandInput)
-    data.id = id;
-    return this.brandRepository.save(data);
-  }
-
-  async remove(id: string) {
-    try{
-      let register = await this.findOne(id);      
-      // if (register) {
-      //   register.status = Status.Deactive;
-      //   let data:BrandEntity = this.brandRepository.create(register)
-      //   return  await this.brandRepository.save(data);
-      // }
-      throw new NotFoundException(`Record cannot find by id ${id}`)
-    }catch(error){   
-      return error;  
-    }
-  }
 }

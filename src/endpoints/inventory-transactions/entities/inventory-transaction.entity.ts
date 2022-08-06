@@ -6,6 +6,6 @@ import { CreateInventoryTransactionDTO } from '../dto/create-inventory-transacti
 @Entity({ name: 'inventory_transactions' })
 export class InventoryTransactions extends CreateInventoryTransactionDTO{
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 }

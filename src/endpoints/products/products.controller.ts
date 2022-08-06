@@ -9,7 +9,8 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 import { Users } from '../auth/entities/user.entity';
-import { GetUser } from '../auth/decorators';
+import { GetUser, RoleProtected } from '../auth/decorators';
+import { ValidRoles } from '../auth/interfaces';
 
 import { ProductsService } from './products.service';
 
@@ -22,6 +23,7 @@ export class ProductsController {
   @ApiResponse({ status: 201, description: 'Product was created', type: Products  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
+  @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
   create(
     @Body() createProductDto: CreateProductDto,
     @GetUser() user: Users,

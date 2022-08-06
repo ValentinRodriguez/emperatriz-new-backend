@@ -14,7 +14,7 @@ import { Crud } from 'src/common/crud';
 @Injectable()
 export class AuthService extends Crud{
 
-  private readonly logger = new Logger('AuthService');
+  private readonly _logger = new Logger('AuthService');
   
   constructor(
     @InjectRepository(Users)
@@ -103,15 +103,15 @@ export class AuthService extends Crud{
         .execute();
 
     } catch (error) {
-      this.handleDBExceptions(error);
+      this.HandleDBExceptions(error);
     }
 
   }
 
-  private handleDBExceptions( error: any ) {
+  private HandleDBExceptions( error: any ) {
     if ( error.code === '23505' ) throw new BadRequestException(error.detail);
     
-    this.logger.error(error)
+    this._logger.error(error)
     console.log(error)
     throw new InternalServerErrorException('Unexpected error, check server logs');
   }

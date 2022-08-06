@@ -6,6 +6,6 @@ import { CreatePaymentConditionDTO } from '../dto/create-payment-condition.input
 @Entity({ name: 'payment_conditions' })
 export class PaymentConditions extends CreatePaymentConditionDTO {
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 }

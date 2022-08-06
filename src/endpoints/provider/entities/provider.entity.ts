@@ -6,7 +6,7 @@ import { CreateProviderDTO } from '../dto/create-provider.input';
 export class Providers extends CreateProviderDTO{
   
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
 }

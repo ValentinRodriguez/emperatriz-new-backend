@@ -4,7 +4,7 @@ import { CreateProductTypeDTO } from '../dto/create-product-type.input';
 
 @Entity()
 export class ProductTypeEntity extends CreateProductTypeDTO {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @OneToMany(() => Products, product => product.productType)  

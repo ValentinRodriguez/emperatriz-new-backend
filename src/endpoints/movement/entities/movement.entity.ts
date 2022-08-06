@@ -6,6 +6,6 @@ import { CreateMovementDTO } from '../dto/create-movement.input';
 export class Movements extends CreateMovementDTO{
 
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 }

@@ -25,7 +25,7 @@ export class CreateFormDTO extends GlobalEntity{
   @Column()
   label: string;
 
-  @Column({ unique: true })
+  @Column()
   formControlName: string;
 
   @Column({ nullable: true })

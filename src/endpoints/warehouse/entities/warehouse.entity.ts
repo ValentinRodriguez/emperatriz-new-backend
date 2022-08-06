@@ -7,7 +7,7 @@ import { Products } from '../../../endpoints/products/entities/product.entity';
 export class Warehouses extends CreateWarehouseDTO {
   @Column()
   @IsString()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @OneToMany(() => Products, product => product.warehouse)

@@ -7,10 +7,10 @@ import { CreateBrandInput } from '../dto/create-brand.input';
 export class Brands extends CreateBrandInput{
 
   @Column()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @OneToMany(() => Products, product => product.brand)
-  products: Products[];
+  product: Products[];
   
 }

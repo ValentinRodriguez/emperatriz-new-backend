@@ -813,6 +813,14 @@
     object-hash "3.0.0"
     tslib "2.4.0"
 
+"@nestjsi/class-validator@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@nestjsi/class-validator/-/class-validator-0.2.2.tgz#b4b8559940088f4c673bdbbf17c0d2a21d51e314"
+  integrity sha512-j4PWRnB85qCV7JmHz5kH6+rY7HQ54o+jTkGAIBTRJjGLmrQONk62moUD2WaJK7DAJs7EhelTSNaluQDSOuB+2w==
+  dependencies:
+    class-validator "0.13.*"
+    validator "13.7.*"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -1879,7 +1887,7 @@ class-transformer@^0.5.1:
   resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
   integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
 
-class-validator@^0.13.2:
+class-validator@0.13.*, class-validator@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.13.2.tgz#64b031e9f3f81a1e1dcd04a5d604734608b24143"
   integrity sha512-yBUcQy07FPlGzUjoLuUfIOXzgynnQPPruyK1Ge2B74k9ROwnle1E+NxLWnUv5OLU8hA/qL5leAE9XnXq3byaBw==
@@ -5309,7 +5317,7 @@ v8-to-istanbul@^9.0.1:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
 
-validator@^13.7.0:
+validator@13.7.*, validator@^13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
   integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
