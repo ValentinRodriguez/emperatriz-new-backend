@@ -22,17 +22,17 @@ export class ProductTypeController {
   createProductType(
     @Body() createProductTypeInput: CreateProductTypeDTO,
     @GetUser() user: Users,) {
-    return this.productTypeService.create(createProductTypeInput);
+    return this.productTypeService.createRegister(createProductTypeInput, user);
   }
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.productTypeService.findAll();
+    return this.productTypeService.findAllRegisters(paginationDto);
   }
 
   @Get(':term')
   findOne(@Param( 'term' ) term: string) {
-    return this.productTypeService.findOne(term);
+    return this.productTypeService.findRegisters(term);
   }
 
   @Put(':id')
@@ -40,11 +40,13 @@ export class ProductTypeController {
     @Param('id', ParseUUIDPipe ) id: string, 
     @GetUser() user: Users,
     @Body() updateProductTypeDTO: UpdateProductTypeDTO) {
-    return this.productTypeService.update(id, updateProductTypeDTO);
+    return this.productTypeService.updateRegister(id, updateProductTypeDTO, user);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe ) id: string) {
-    return this.productTypeService.remove(id);
+  remove(
+    @Param('id', ParseUUIDPipe ) id: string, 
+    @GetUser() user: Users,) {
+    return this.productTypeService.removeRegister(id, user);
   }
 }

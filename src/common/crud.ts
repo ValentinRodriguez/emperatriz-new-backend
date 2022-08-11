@@ -6,19 +6,16 @@ import { PaginationDto } from "./dtos/pagination.dto";
 import { Status } from "./entity/entity";
 import { ResponseAPI } from "./response/response";
 import { Users } from "../endpoints/auth/entities/user.entity";
-import { CreateBrandInput } from "src/endpoints/brand/dto/create-brand.input";
-import { getDateTime } from "src/utils/date.utils";
+import { getDateTime } from "../utils/date.utils";
 
 export class Crud{
-
-    private readonly logger = new Logger('CRUD');
 
     constructor(
        public anyRepository: Repository<any>,
        public relations?:string[]
     ){}
 
-    async findAll(paginationDto?:PaginationDto) {
+    async findAllRegisters(paginationDto?:PaginationDto) {
         let data = null;
 
         try {
@@ -36,7 +33,7 @@ export class Crud{
                     where: {
                         status: Status.Active
                     }
-                })
+                })                
             }
             return new ResponseAPI(200, "Success", data);
         } catch (error) {
@@ -50,9 +47,7 @@ export class Crud{
         
         if ( isUUID(term) ) {
             console.log(term);            
-            data = await this.anyRepository.findOneBy({ id: term });
-            // console.log(data);
-            
+            data = await this.anyRepository.findOneBy({ id: term });            
         }else{
             data = await this.anyRepository.find({
                 relations: this.relations,
@@ -68,15 +63,19 @@ export class Crud{
         return new ResponseAPI(200, "Success", data);
     }
 
-    async createRegister(create: CreateBrandInput, user:Users) {        
+    async createRegister(create:any, user:Users, files?:Array<Express.Multer.File>) {        
         try {
             const dataCreate = this.anyRepository.create(create);
             dataCreate.created_by = user.id;
-
+            files && (dataCreate.files = files.map(file => file.filename));
+            console.log(dataCreate);
+            
             const dataSave = await this.anyRepository.save(dataCreate);
             
             return new ResponseAPI( 200, "Success", dataSave );  
         } catch (error) {
+            console.log(error);
+            
             this.handleDBExceptions(error);
         }
     }
@@ -114,14 +113,14 @@ export class Crud{
 
           throw new NotFoundException(`Record cannot find by id ${id}`)
         }catch(error){   
+            console.log(error);            
             this.handleDBExceptions(error); 
         }
     }
 
-    private handleDBExceptions( error: any ) {
+    public handleDBExceptions( error: any ) {
         if ( error.code === '23505' ) throw new BadRequestException(error.detail);
-        
-        this.logger.error(error);
+        if ( error.code === '22P02' ) throw new BadRequestException(error.detail);
         throw new InternalServerErrorException('Unexpected error, check server logs');    
     }
 }

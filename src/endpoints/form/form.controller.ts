@@ -1,8 +1,9 @@
-import { FormService } from './form.service';
-import { CreateFormDTO } from './dto/create-form.input';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FormService } from './form.service';
+import { CreateFormDTO } from './dto/create-form.input';
 import { Forms } from './entities/form.entity';
+import { IsPublic } from '../auth/decorators';
 
 @ApiTags('Forms')
 @Controller('forms')
@@ -23,6 +24,7 @@ export class FormController {
   }
 
   @Get()
+  @IsPublic()
   findAll() {
     return this.formService.findAll();
   }

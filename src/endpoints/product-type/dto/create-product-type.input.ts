@@ -1,11 +1,11 @@
-import { IsString } from 'class-validator';
 import { GlobalEntity } from '../../../common/entity/entity';
 import { Column } from 'typeorm';
+import { IsGlobalString } from 'src/endpoints/auth/decorators';
 
 export class CreateProductTypeDTO extends GlobalEntity {
-  @IsString()
+  @IsGlobalString({ minLength: 1 })
   @Column()
-  title_productType: string;
+  title: string;
 
 
 }

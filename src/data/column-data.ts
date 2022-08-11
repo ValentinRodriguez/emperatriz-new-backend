@@ -27,7 +27,7 @@ export const columnData: CreateColumnInput[] = [
         columns: JSON.stringify(
             [
                 {field: "id", header: "ID", type: TypeColumn.Text },
-                {field: "title_warehouse", header: "Bodega", type: TypeColumn.Text },
+                {field: "title", header: "Bodega", type: TypeColumn.Text },
                 {field: "description_warehouse", header: "Descripcion", type: TypeColumn.Text },
                 {field: "actions", header: "Acciones", type: TypeColumn.Actions }
             ]
@@ -50,7 +50,7 @@ export const columnData: CreateColumnInput[] = [
         columns: JSON.stringify(
             [
                 {field: "id", header: "ID", type: TypeColumn.Text },
-                {field: "title_category", header: "Descripcion", type: TypeColumn.Text },
+                {field: "title", header: "Descripcion", type: TypeColumn.Text },
                 {field: "actions", header: "Acciones", type: TypeColumn.Actions }
             ]
         )
@@ -92,7 +92,7 @@ export const columnData: CreateColumnInput[] = [
         state: StateToFilter.Movement,
         columns: JSON.stringify(
             [
-                { field: 'title_movement', header: 'Titulo' , type: TypeColumn.Text},
+                { field: 'title', header: 'Titulo' , type: TypeColumn.Text},
                 { field: 'description_movement', header: 'Descripción' , type: TypeColumn.Text},
                 { field: 'origin_movement', header: 'Origen' , type: TypeColumn.Text},
                 { field: 'client_control_movement', header: 'Clientes' , type: "affirmation"},

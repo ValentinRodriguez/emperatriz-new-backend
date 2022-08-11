@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
 import { IncomingHttpHeaders } from 'http';
+import { ResponseAPI } from 'src/common/response/response';
 
 import { AuthService } from './auth.service';
 import { RawHeaders, GetUser, IsPublic } from './decorators';
@@ -29,70 +30,55 @@ export class AuthController {
   loginUser(@Body() loginUserDto: LoginUserDto ) {
     return this.authService.login( loginUserDto );
   }
-
-  @Get('check-status')   
-  checkAuthStatus(
-    @GetUser() user: Users
-  ) {
-    return this.authService.checkAuthStatus( user );
-  }
-
   
   @Get()  
   findAll() {
-    return this.authService.findAll();
+    return this.authService.findAllRegisters();
   }
 
-
-  @Get('private')
-  @UseGuards( AuthGuard() )
-  testingPrivateRoute(
-    @Req() request: Express.Request,
-    @GetUser() user: Users,
-    @GetUser('email') userEmail: string,
-    
-    @RawHeaders() rawHeaders: string[],
-    @Headers() headers: IncomingHttpHeaders,
-  ) {
-
-
-    return {
-      ok: true,
-      message: 'Hola Mundo Private',
-      user,
-      userEmail,
-      rawHeaders,
-      headers
-    }
-  }
-
-
-  // @SetMetadata('roles', ['admin','super-user'])
-
-  @Get('private2')
-  @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
-  @UseGuards( AuthGuard(), UserRoleGuard )
-  privateRoute2(
-    @GetUser() user: Users
-  ) {
-
-    return {
-      ok: true,
-      user
-    }
-  }
-
-
-  @Get('private3')
+  @Get('whoami')
   privateRoute3(
     @GetUser() user: Users
   ) {
-
-    return {
-      ok: true,
-      user
-    }
+    return new ResponseAPI(200, 'Success', user);
   }
+
+  // @Get('private')
+  // @UseGuards( AuthGuard() )
+  // testingPrivateRoute(
+  //   @Req() request: Express.Request,
+  //   @GetUser() user: Users,
+  //   @GetUser('email') userEmail: string,    
+  //   @RawHeaders() rawHeaders: string[],
+  //   @Headers() headers: IncomingHttpHeaders,
+  // ) {
+
+  //   return {
+  //     ok: true,
+  //     message: 'Hola Mundo Private',
+  //     user,
+  //     userEmail,
+  //     rawHeaders,
+  //     headers
+  //   }
+  // }
+
+  // @SetMetadata('roles', ['admin','super-user'])
+  // @Get('private2')
+  // @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
+  // @UseGuards( AuthGuard(), UserRoleGuard )
+  // privateRoute2(
+  //   @GetUser() user: Users
+  // ) {
+
+  //   return {
+  //     ok: true,
+  //     user
+  //   }
+  // }
+
+
+
 
 
 

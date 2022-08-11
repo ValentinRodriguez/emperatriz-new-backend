@@ -20,18 +20,17 @@ export class CategoryController {
   createCategory(
     @Body() createCategoryInput: CreateCategoryDTO,
     @GetUser() user: Users,) {
-    console.log(createCategoryInput); 
-    return this.categoryService.create(createCategoryInput);
+    return this.categoryService.createRegister(createCategoryInput, user);
   }
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.categoryService.findAll();
+    return this.categoryService.findAllRegisters(paginationDto);
   }
 
   @Get(':term')
   findOne(@Param( 'term' ) term: string) {
-    return this.categoryService.findOne(term);
+    return this.categoryService.findRegisters(term);
   }
 
   @Put(':id')
@@ -41,11 +40,11 @@ export class CategoryController {
     @Body() updateCategoryInput: UpdateCategoryDTO,
   ) {
     console.log(updateCategoryInput);    
-    return this.categoryService.update(updateCategoryInput.id, updateCategoryInput);
+    return this.categoryService.updateRegister(id, updateCategoryInput,user);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe ) id: string) {
-    return this.categoryService.remove(id);
+  remove(@Param('id', ParseUUIDPipe ) id: string, @GetUser() user:Users) {
+    return this.categoryService.removeRegister(id,user);
   }
 }

@@ -1,9 +1,9 @@
 import { Column } from 'typeorm';
-import { IsString } from 'class-validator';
+import { IsGlobalString } from '../../../endpoints/auth/decorators';
 import { GlobalEntity } from '../../../common/entity/entity';
 
 export class CreateCategoryDTO extends GlobalEntity {
-  @IsString()
+  @IsGlobalString({ minLength: 1 })
   @Column()
-  title_category: string;
+  title: string;
 }

@@ -30,17 +30,19 @@ export class Users extends GlobalEntity{
     @Column('text', { array: true, default: ['user'] })
     roles: string[];
 
+    @Column('bool', { default: true })
+    isAuthenticated:boolean;
+
     @OneToMany(
         () => Product,
         ( product ) => product.user
     )
-    product: Product;
+    products: Product;
 
 
     @BeforeInsert()
     checkFieldsBeforeInsert() {
-        this.email = this.email.toLowerCase().trim();
-        console.log(this.password);        
+        this.email = this.email.toLowerCase().trim();  
         this.password = bcrypt.hashSync( this.password, 10 )
     }
 

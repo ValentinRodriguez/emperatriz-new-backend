@@ -26,7 +26,7 @@ export class BrandController {
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.brandService.findAll(paginationDto);
+    return this.brandService.findAllRegisters(paginationDto);
   }
 
   @Get(':term')

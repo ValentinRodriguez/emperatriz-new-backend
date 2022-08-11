@@ -6,7 +6,7 @@ export const InventoryTransactionData:any = [
         type: TypeElement.autoComplete,
         form: UrlProgram.GestionTransaccionesInventario,
         label: "Tipo de Movimiento",
-        optionLabel: "title_movement",
+        optionLabel: "title",
         formControlName: "id_movement_type",
         name: "id_movement_type",
         placeholder: "Seleccione tipo de movimiento",

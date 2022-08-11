@@ -1,10 +1,10 @@
 
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ColumnsService } from './columns.service';
 import { Columns } from './entities/column.entity';
 import { CreateColumnInput } from './dto/create-column.input';
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { IsPublic } from '../auth/decorators';
 
 @ApiTags('Columns')
 @Controller('columns')
@@ -21,6 +21,7 @@ export class ColumnsController {
   }
 
   @Get()
+  @IsPublic()
   findAll() {
     return this.columnsService.findAll();
   }

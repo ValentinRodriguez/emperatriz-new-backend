@@ -2,15 +2,15 @@ import { TypeElement, UrlProgram, YesNo } from "../../utils/global-table-enum";
 
 export const MovementType:any = [
     {
-        input_id: "title_movement",
+        input_id: "title",
         form: UrlProgram.GestionTiposMovimientos,
         typeElement: "text",
         type: TypeElement.inputVerify,
         stateInput: "dataExiste",
         action:'verificaDataExiste',
         label: "Titulo",
-        formControlName: "title_movement",
-        name: "title_movement",
+        formControlName: "title",
+        name: "title",
         placeholder: "Nombre del producto",
         validations: JSON.stringify( [{ required: true}]), 
         disabled: false,

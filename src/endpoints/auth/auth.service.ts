@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
 
@@ -9,12 +9,11 @@ import { Users } from './entities/user.entity';
 import { LoginUserDto, CreateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { Crud } from 'src/common/crud';
+import { ResponseAPI } from 'src/common/response/response';
 
 
 @Injectable()
 export class AuthService extends Crud{
-
-  private readonly _logger = new Logger('AuthService');
   
   constructor(
     @InjectRepository(Users)
@@ -32,15 +31,11 @@ export class AuthService extends Crud{
       await this.userRepository.save( user )
       delete user.password;
 
-      return {
-        ...user,
-        token: this.getJwtToken({ id: user.id })
-      };
+      return new ResponseAPI(200, 'Successful', this.getJwtToken({ id: user.id }));
 
     } catch (error) {
-      this.handleDBErrors(error);
+      this.handleDBExceptions(error);
     }
-
   }
 
   async login( loginUserDto: LoginUserDto ) {
@@ -49,72 +44,32 @@ export class AuthService extends Crud{
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, id: true } //! OJO!
+      select: { email: true, password:true, id: true }
     });
 
-    if ( !user ) 
-      throw new UnauthorizedException('Credentials are not valid (email)');
-      
-    if ( !bcrypt.compareSync( password, user.password ) )
-      throw new UnauthorizedException('Credentials are not valid (password)');
-
-    return {
-      ...user,
-      token: this.getJwtToken({ id: user.id })
-    };
+    if ( !user ) throw new UnauthorizedException('Credentials are not valid (email)');      
+    if ( !bcrypt.compareSync( password, user.password ) ) throw new UnauthorizedException('Credentials are not valid (password)');
+    
+    delete user.password;
+    
+    return new ResponseAPI(200, 'Successful', this.getJwtToken({ id: user.id }))
   }
-
-  async checkAuthStatus( user: Users ){
-
-    return {
-      ...user,
-      token: this.getJwtToken({ id: user.id })
-    };
-
-  }
-
-
   
   private getJwtToken( payload: JwtPayload ) {
-    const token = this.jwtService.sign( payload );
-    return token;
-
+    return this.jwtService.sign( payload );  
   }
 
-  private handleDBErrors( error: any ): never {
+  // async deleteAllData() {
+  //   const query = this.userRepository.createQueryBuilder('users');
 
-
-    if ( error.code === '23505' ) 
-      throw new BadRequestException( error.detail );
-
-    console.log(error)
-
-    throw new InternalServerErrorException('Please check server logs');
-
-  }
-
-  async deleteAllData() {
-    const query = this.userRepository.createQueryBuilder('users');
-
-    try {
-      return await query
-        .delete()
-        .where({})
-        .execute();
-
-    } catch (error) {
-      this.HandleDBExceptions(error);
-    }
-
-  }
-
-  private HandleDBExceptions( error: any ) {
-    if ( error.code === '23505' ) throw new BadRequestException(error.detail);
-    
-    this._logger.error(error)
-    console.log(error)
-    throw new InternalServerErrorException('Unexpected error, check server logs');
-  }
-
+  //   try {
+  //     return await query
+  //       .delete()
+  //       .where({})
+  //       .execute();
+  //   } catch (error) {
+  //     this.handleDBExceptions(error);
+  //   }
+  // }
 
 }

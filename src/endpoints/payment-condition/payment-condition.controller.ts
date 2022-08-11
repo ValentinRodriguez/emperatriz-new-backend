@@ -1,10 +1,10 @@
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { PaymentConditionService } from './payment-condition.service';
 import { PaymentConditions } from './entities/payment-condition.entity';
 import { CreatePaymentConditionDTO } from './dto/create-payment-condition.input';
 import { UpdatePaymentConditionInput } from './dto/update-payment-condition.input';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
-import { GetUser } from '../auth/decorators';
+import { GetUser, IsPublic } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
@@ -25,8 +25,9 @@ export class PaymentConditionController {
   }
 
   @Get()
+  @IsPublic()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.paymentConditionService.findAll(paginationDto);
+    return this.paymentConditionService.findAllRegisters(paginationDto);
   }
 
   @Get(':term')

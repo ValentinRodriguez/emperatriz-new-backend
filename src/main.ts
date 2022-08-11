@@ -10,12 +10,15 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    })
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     forbidNonWhitelisted: true,
+  //     transformOptions: {
+  //       enableImplicitConversion: true,
+  //     },
+  //   })
+  // );
 
   app.enableCors({
     origin: "http://localhost:4200",
@@ -23,10 +26,10 @@ async function bootstrap() {
   });
   
   const config = new DocumentBuilder()
-    .setTitle('Teslo RESTFul API')
-    .setDescription('Teslo shop endpoints')
-    .setVersion('1.0')
-    .build();
+                    .setTitle('Teslo RESTFul API')
+                    .setDescription('Teslo shop endpoints')
+                    .setVersion('1.0')
+                    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

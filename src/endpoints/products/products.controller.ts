@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, ParseUUIDPipe, Query, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, ParseUUIDPipe, Query, Put, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { PaginationDto } from './../../common/dtos/pagination.dto';
@@ -13,6 +13,9 @@ import { GetUser, RoleProtected } from '../auth/decorators';
 import { ValidRoles } from '../auth/interfaces';
 
 import { ProductsService } from './products.service';
+import { AnyFilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { fileFilter, fileNamer } from '../files/helpers';
 
 @ApiTags('Products')
 @Controller('products')
@@ -24,34 +27,39 @@ export class ProductsController {
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
+  @UseInterceptors(AnyFilesInterceptor())
   create(
     @Body() createProductDto: CreateProductDto,
     @GetUser() user: Users,
-  ) {
-    return this.productsService.create(createProductDto, user );
+    @UploadedFiles() files: Array<Express.Multer.File>
+  ) {          
+    return this.productsService.createRegister(createProductDto, user, files );
   }
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.productsService.findAll( paginationDto );
+    return this.productsService.findAllRegisters( paginationDto );
   }
 
   @Get(':term')
   findOne(@Param( 'term' ) term: string) {
-    return this.productsService.findOnePlain( term );
+    return this.productsService.findRegisters( term );
   }
 
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe ) id: string, 
     @GetUser() user: Users,
-    @Body() updateProductDto: UpdateProductDto,
-  ) {
-    return this.productsService.update( id, updateProductDto, user );
+    @Body() updateProductDto: UpdateProductDto ) {
+    return this.productsService.updateRegister( id, updateProductDto, user );
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe ) id: string) {
-    return this.productsService.remove( id );
+  remove(
+    @Param('id', ParseUUIDPipe ) id: string, 
+    @GetUser() user: Users,) {
+    return this.productsService.removeRegister( id, user );
   }
 }
+
+

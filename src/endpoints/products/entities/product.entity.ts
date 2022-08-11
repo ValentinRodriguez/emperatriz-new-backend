@@ -1,7 +1,4 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
-
-import { ProductImage } from './';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Users } from '../../auth/entities/user.entity';
 import { Brands } from '../../../endpoints/brand/entities/brand.entity';
 import { Category } from '../../../endpoints/category/entities/category.entity';
@@ -15,15 +12,10 @@ export class Products extends CreateProductDto{
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    // images
-    @ApiProperty()
-    @OneToMany( () => ProductImage, (productImage) => productImage.product, { cascade: true, eager: true })
-    images: ProductImage[];
-
-    @ManyToOne(() => Users, ( user ) => user.product,{ eager: true } )
+    @ManyToOne(() => Users, ( user ) => user.products,{ eager: true } )
     user: Users
 
-    @ManyToOne(()=> Brands, brand => brand.product,{ eager: true })
+    @ManyToOne(()=> Brands, brand => brand.products,{ eager: true })
     brand: Brands;
 
     @ManyToOne(()=> Category, category => category.products,{ eager: true })

@@ -2,15 +2,15 @@ import { TypeElement, UrlProgram } from "../../utils/global-table-enum";
 
 export const CategoryData:any = [
     {
-        input_id: "title_category",
+        input_id: "title",
         form: UrlProgram.GestionDeCategorias,
         typeElement: "text",
         type: TypeElement.inputVerify,
         stateInput: "dataExiste",
         action:'verificaDataExiste',
         label: "Titulo",
-        formControlName: "title_category",
-        name: "title_category",
+        formControlName: "title",
+        name: "title",
         placeholder: "Nombre de la categoria",        
         validations: JSON.stringify( [{ required: true}]), 
         disabled: false,

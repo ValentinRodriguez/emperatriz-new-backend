@@ -4,7 +4,7 @@ import { CreateCurrencyDTO } from './dto/create-currency.input';
 import { UpdateCurrencyInput } from './dto/update-currency.input';
 import { Body, Controller, Post, Put, Param, ParseUUIDPipe, Delete, Query, Get } from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { GetUser } from '../auth/decorators';
+import { GetUser, IsPublic } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 
 @ApiTags('Currency')
@@ -24,8 +24,9 @@ export class CurrencyController {
   }
 
   @Get()
+  @IsPublic()
   findAll() {
-    return this.currencyService.findAll();
+    return this.currencyService.findAllRegisters();
   }
 
   @Get(':term')

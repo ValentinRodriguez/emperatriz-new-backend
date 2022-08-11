@@ -13,3 +13,14 @@ export const fileNamer = ( req: Express.Request, file: Express.Multer.File, call
     callback(null, fileName );
 
 }
+
+// export const fileNamer = (file: Express.Multer.File ) => {
+    
+//     if ( !file ) throw new Error('File is empty');
+
+//     const fileExtension = file.mimetype.split('/')[1];
+
+//     const fileName = `${ uuid() }.${ fileExtension }`;
+
+//     return fileName
+// }

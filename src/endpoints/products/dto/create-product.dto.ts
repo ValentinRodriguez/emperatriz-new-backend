@@ -1,6 +1,6 @@
 import { BeforeInsert, BeforeUpdate, Column } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsString, IsOptional, IsUUID } from 'class-validator';
+import { IsArray, IsOptional, IsUUID } from 'class-validator';
 import { GlobalEntity } from '../../../common/entity/entity';
 import { IsGlobalString,IsGlobalNumber } from '../../../endpoints/auth/decorators';
 
@@ -58,10 +58,10 @@ export class CreateProductDto extends GlobalEntity{
     @Column({nullable: true})
     purchase_note?:string
 
-    @IsString({ each: true })
+    @IsGlobalString({ each: true })
     @IsArray()
     @IsOptional()
-    @Column('text', { array: true })
+    @Column('text', { array: true, nullable: true })
     tags?: string[];
     
     @IsGlobalNumber()
@@ -79,11 +79,10 @@ export class CreateProductDto extends GlobalEntity{
     @Column('text', { unique: true, nullable: true, default: null })
     slug?: string;
  
-    @IsString({ each: true })
+    @IsGlobalString({ each: true })
     @IsArray()
-    @IsUUID()
     @Column('text', { array: true })
-    imagesId: string[];
+    files: string[];
 
     @IsGlobalString()
     @Column()
