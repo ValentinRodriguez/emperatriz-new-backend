@@ -2,7 +2,7 @@ import { TypeElement, UrlProgram } from "../../utils/global-table-enum";
 
 export const WareHouseData:any = [
     {
-        input_id: "title",
+        input_id: "title_warehouse",
         form: UrlProgram.GestionDeBodegas,
         typeElement: "text",
         type: TypeElement.inputVerify,
@@ -12,7 +12,7 @@ export const WareHouseData:any = [
         formControlName: "title",
         name: "title",
         placeholder: "Nombre de la bodega",        
-        validations: JSON.stringify( [{ required: true, minLength: 5 }]), 
+        validations: JSON.stringify( [{ required: true }]), 
         disabled: false,
         class: "field col-12 md:col-6"
     },

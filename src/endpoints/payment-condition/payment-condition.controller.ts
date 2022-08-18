@@ -25,7 +25,7 @@ export class PaymentConditionController {
   }
 
   @Get()
-  @IsPublic()
+  // @IsPublic()
   findAll( @Query() paginationDto:PaginationDto ) {
     return this.paymentConditionService.findAllRegisters(paginationDto);
   }

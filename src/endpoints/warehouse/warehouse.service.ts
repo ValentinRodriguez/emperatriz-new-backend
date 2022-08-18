@@ -1,9 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
-import { CreateWarehouseDTO } from './dto/create-warehouse.input';
-import { UpdateWarehouseInput } from './dto/update-warehouse.input';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Warehouses } from './entities/warehouse.entity';
 import { Crud } from 'src/common/crud';
 

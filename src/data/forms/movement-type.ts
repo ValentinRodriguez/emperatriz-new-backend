@@ -2,7 +2,7 @@ import { TypeElement, UrlProgram, YesNo } from "../../utils/global-table-enum";
 
 export const MovementType:any = [
     {
-        input_id: "title",
+        input_id: "title_movement_type",
         form: UrlProgram.GestionTiposMovimientos,
         typeElement: "text",
         type: TypeElement.inputVerify,

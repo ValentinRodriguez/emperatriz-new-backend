@@ -35,7 +35,7 @@ export class Forms extends GlobalEntity{
   @IsString()
   label: string;
 
-  @Column({ unique: true })
+  @Column()
   @IsString()
   formControlName: string;
 

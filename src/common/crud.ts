@@ -20,11 +20,14 @@ export class Crud{
 
         try {
             if(!paginationDto){
+                console.log('no pagination');
+                
                 data = await this.anyRepository.find({
                   relations: this.relations,
                   where: { status: Status.Active }
                 });
             }else{
+                console.log('pagination');
                 const { limit = 10, offset = 0 } = paginationDto;
                 data = await this.anyRepository.find({
                     take: limit,

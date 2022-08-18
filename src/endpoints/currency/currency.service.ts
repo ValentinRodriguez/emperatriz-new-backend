@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Crud } from 'src/common/crud';
-import { Status } from 'src/common/entity/entity';
 import { Repository } from 'typeorm';
 import { CreateCurrencyDTO } from './dto/create-currency.input';
 import { UpdateCurrencyInput } from './dto/update-currency.input';

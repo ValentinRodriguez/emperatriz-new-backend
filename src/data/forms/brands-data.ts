@@ -2,7 +2,7 @@ import { TypeElement, UrlProgram } from "../../utils/global-table-enum";
 
 export const BrandsData:any = [
     {
-        input_id: "title",
+        input_id: "title_brand",
         form: UrlProgram.GestionDeMarcas,
         typeElement: "text",
         type: TypeElement.inputVerify,

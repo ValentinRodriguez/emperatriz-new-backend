@@ -9,7 +9,7 @@ import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
 
 @ApiTags('Warehouse')
-@Controller('warehouse')
+@Controller('gestion-de-bodegas')
 export class WarehouseController {
   constructor(private readonly warehouseService: WarehouseService) {}
 
@@ -19,17 +19,17 @@ export class WarehouseController {
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
   createWarehouse(
     @Body() createWarehouseDTO: CreateWarehouseDTO,
-    @GetUser() user:Users) {
-    return this.warehouseService.createRegister(createWarehouseDTO, user);
+    @GetUser() user:Users) {     
+      return this.warehouseService.createRegister(createWarehouseDTO, user);
   }
 
   @Get()
   findAll( @Query() paginationDto:PaginationDto ) {
-    return this.warehouseService.findAllRegisters(paginationDto);
+    return this.warehouseService.findAllRegisters();
   }
 
   @Get(':term')
-  findOne(@Param( 'term' ) term: string) {
+  findOne(@Param( 'term' ) term: string) {   
     return this.warehouseService.findRegisters(term);
   }
 

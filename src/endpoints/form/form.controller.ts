@@ -24,7 +24,7 @@ export class FormController {
   }
 
   @Get()
-  @IsPublic()
+  // @IsPublic()
   findAll() {
     return this.formService.findAll();
   }

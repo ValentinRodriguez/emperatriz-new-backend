@@ -1,8 +1,8 @@
-import { join } from 'path';
-
+import { DataSource } from 'typeorm';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_GUARD } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { CommonModule } from './common/common.module';
@@ -13,11 +13,9 @@ import { AuthModule } from './endpoints/auth/auth.module';
 import { MessagesWsModule } from './endpoints/messages-ws/messages-ws.module';
 
 import { typeOrmAsyncConfig } from './config/typeorm.config';
-import { DataSource } from 'typeorm';
 import { AccountCatalogueModule } from './endpoints/account-catalogue/account-catalogue.module';
-import { APP_GUARD } from '@nestjs/core';
 import { IsAuthenticatedGuard } from './endpoints/auth/guards/is-authenticated.guard';
-import { UserRoleGuard } from './endpoints/auth/guards/user-role.guard';
+// import { UserRoleGuard } from './endpoints/auth/guards/user-role.guard';
 import { BranchOfficeModule } from './endpoints/branch-office/branch-office.module';
 import { EnterpriseModule } from './endpoints/enterprise/enterprise.module';
 import { BrandModule } from './endpoints/brand/brand.module';
@@ -34,6 +32,7 @@ import { ProductTypeModule } from './endpoints/product-type/product-type.module'
 import { ProviderModule } from './endpoints/provider/provider.module';
 import { PurchaseOrderModule } from './endpoints/purchase-order/purchase-order.module';
 import { WarehouseModule } from './endpoints/warehouse/warehouse.module';
+import { ModulesModule } from './endpoints/modules/modules.module';
 
 @Module({
   imports: [
@@ -66,19 +65,14 @@ import { WarehouseModule } from './endpoints/warehouse/warehouse.module';
     ProviderModule,
     PurchaseOrderModule,   
     CommonModule,
-    WarehouseModule
+    WarehouseModule,
+    ModulesModule
   ],
   providers: [
     {
       provide: APP_GUARD,
       useClass: IsAuthenticatedGuard
-    },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: UserRoleGuard
-    // }
+    }
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}

@@ -24,7 +24,7 @@ export class CurrencyController {
   }
 
   @Get()
-  @IsPublic()
+  // @IsPublic()
   findAll() {
     return this.currencyService.findAllRegisters();
   }
