@@ -33,6 +33,7 @@ import { ProviderModule } from './endpoints/provider/provider.module';
 import { PurchaseOrderModule } from './endpoints/purchase-order/purchase-order.module';
 import { WarehouseModule } from './endpoints/warehouse/warehouse.module';
 import { ModulesModule } from './endpoints/modules/modules.module';
+import { RolesModule } from './endpoints/roles/roles.module';
 
 @Module({
   imports: [
@@ -66,7 +67,8 @@ import { ModulesModule } from './endpoints/modules/modules.module';
     PurchaseOrderModule,   
     CommonModule,
     WarehouseModule,
-    ModulesModule
+    ModulesModule,
+    RolesModule
   ],
   providers: [
     {

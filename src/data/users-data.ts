@@ -1,4 +1,3 @@
-import { ValidRoles } from "../endpoints/auth/interfaces/valid-roles";
 
 export const usersData: any[] = [
     {
@@ -6,7 +5,7 @@ export const usersData: any[] = [
         firstname: 'super',
         lastname:'admin',
         password: 'Si22500192319.',
-        roles: [ValidRoles.SUPER_ADMIN],
+        // roles: [ValidRoles.SUPER_ADMIN],
         avatar: 'default.png'
     }
 ]

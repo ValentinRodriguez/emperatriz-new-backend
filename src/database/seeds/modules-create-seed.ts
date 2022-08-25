@@ -11,7 +11,7 @@ export class InputModulesCreateSeeder implements Seeder {
     constructor() { }
 
     public async run(factory: Factory): Promise<void> { 
-        // await getManager().query('TRUNCATE users CASCADE');
+        await getManager().query('TRUNCATE modules CASCADE');
 
         for (const module of inputModulesData) {
             await factory(ModuleEntity)().create(module);

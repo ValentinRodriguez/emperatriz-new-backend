@@ -1,8 +1,15 @@
-
-
-
 export enum ValidRoles {
     ADMIN = 'admin',
     SUPER_ADMIN = 'super-admin',
     USER = 'user',
+    CONTROL_PANEL = 'control-panel',
+    MY_BUSINESS = 'my-business',
+    SALES = 'sales',
+    INVENTORY = 'inventory',
+    SHOPPING = 'shopping',
+    GENERAL_ACCOUNTING = 'general-accounting',
+    HUMAN_RESOURCES = 'human-resources',
+    ACCOUNTS_TO_PAY = 'accounts-to-pay',
+    ACCOUNTS_TO_RECEIVE = 'accounts-to-receive',
+    ONLINE_SHOP = 'online-shop',
 }

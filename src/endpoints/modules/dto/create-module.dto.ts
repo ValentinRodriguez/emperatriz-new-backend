@@ -1,9 +1,9 @@
+import { IsArray } from "class-validator";
 import { Column } from "typeorm";
 import { GlobalEntity } from "../../../common/entity/entity";
 import { IsGlobalString } from "../../../endpoints/auth/decorators";
-import { IsArray } from "class-validator";
 
-interface Programs {
+export interface Programs {
     id: string;
     label: string;
     icon: string;

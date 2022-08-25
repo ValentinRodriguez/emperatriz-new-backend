@@ -1,7 +1,8 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Product } from '../../products/entities';
-import { GlobalEntity } from '../../../common/entity/entity';
 import * as bcrypt from 'bcrypt';
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { GlobalEntity } from '../../../common/entity/entity';
+import { RoleEntity } from '../../../endpoints/roles/entities/role.entity';
+import { Product } from '../../products/entities';
 
 @Entity({ name: 'users' })
 export class Users extends GlobalEntity{
@@ -27,18 +28,15 @@ export class Users extends GlobalEntity{
     @Column('text', { default: 'default.png' })
     avatar: string;
 
-    @Column('text', { array: true, default: ['user'] })
-    roles: string[];
-
     @Column('bool', { default: true })
     isAuthenticated:boolean;
 
-    @OneToMany(
-        () => Product,
-        ( product ) => product.user
-    )
-    products: Product;
+    @OneToOne(() => RoleEntity, (role) => role.user,{ eager: true, cascade: true }) 
+    @JoinColumn()
+    roles: RoleEntity
 
+    @OneToMany( () => Product, ( product ) => product.user )
+    products: Product;
 
     @BeforeInsert()
     checkFieldsBeforeInsert() {

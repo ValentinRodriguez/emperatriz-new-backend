@@ -1,14 +1,12 @@
 
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { RolHasAccess } from '../auth/decorators';
 import { AccountCatalogueService } from './account-catalogue.service';
 import { CreateAccountCatalogueDTO } from './dto/create-account-catalogue.input';
 import { UpdateAccountCatalogueDTO } from './dto/update-account-catalogue.input';
-import { Controller, Post, Body, Get, Put, Delete, Param, Query } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { IsPublic, RolHasAccess } from '../auth/decorators';
-import { Product } from '../products/entities';
-import { ValidRoles } from '../auth/interfaces';
 import { AccountCatalogue } from './entities/account-catalogue.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Account-Catalogue')
 @Controller('account_catalogue')
@@ -25,7 +23,7 @@ export class AccountCatalogueController {
   }
 
   @Get()
-  @RolHasAccess(ValidRoles.SUPER_ADMIN)
+  @RolHasAccess()
   findAll(@Query() paginationDto:PaginationDto ) {
     return this.accountCatalogueService.findAll();
   }

@@ -1,9 +1,8 @@
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { CanActivate, ExecutionContext, Injectable, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { Users } from '../entities/user.entity';
 import { META_ROLES } from '../decorators/role-protected.decorator';
-import { ValidRoles } from '../interfaces';
+import { Users } from '../entities/user.entity';
 
 @Injectable()
 export class UserRoleGuard implements CanActivate {
@@ -24,14 +23,9 @@ export class UserRoleGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const user = req.user as Users;
 
-    if ( !user ) throw new BadRequestException('User not found');
+    // console.log(user.roles);
 
-    for (const role of user.roles ) {      
-      if ( acceptedRoles.includes( role ) || role === ValidRoles.SUPER_ADMIN ) return true;      
-    }
+    throw new Error( `User ${ user.firstname } ${ user.lastname } need a valid role to access this endpoint` );    
     
-    throw new ForbiddenException(
-      `User ${ user.firstname } ${ user.lastname } need a valid role: [${ acceptedRoles }]`
-    );
   }
 }

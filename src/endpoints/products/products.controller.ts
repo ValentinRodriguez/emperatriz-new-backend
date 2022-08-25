@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, ParseUUIDPipe, Query, Put, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { PaginationDto } from './../../common/dtos/pagination.dto';
@@ -8,14 +8,11 @@ import { Products } from './entities/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
+import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
-import { GetUser, RoleProtected } from '../auth/decorators';
-import { ValidRoles } from '../auth/interfaces';
 
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { ProductsService } from './products.service';
-import { AnyFilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { fileFilter, fileNamer } from '../files/helpers';
 
 @ApiTags('Products')
 @Controller('products')
@@ -26,7 +23,6 @@ export class ProductsController {
   @ApiResponse({ status: 201, description: 'Product was created', type: Products  })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
-  @RoleProtected( ValidRoles.SUPER_ADMIN, ValidRoles.ADMIN )
   @UseInterceptors(AnyFilesInterceptor())
   create(
     @Body() createProductDto: CreateProductDto,
