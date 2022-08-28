@@ -13,7 +13,6 @@ export class IsAuthenticatedGuard extends AuthGuard('jwt') {
       context.getHandler(),
       context.getClass(),
     ]);
-    console.log(isPublic);
     
     return isPublic ? true : super.canActivate(context);
   }

@@ -1,12 +1,12 @@
+import { BadRequestException, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { Like } from "typeorm";
 import { Repository } from "typeorm/repository/Repository";
-import { BadRequestException, InternalServerErrorException, Logger, NotFoundException } from "@nestjs/common";
 import { validate as isUUID } from 'uuid';
+import { Users } from "../endpoints/auth/entities/user.entity";
+import { getDateTime } from "../utils/date.utils";
 import { PaginationDto } from "./dtos/pagination.dto";
 import { Status } from "./entity/entity";
 import { ResponseAPI } from "./response/response";
-import { Users } from "../endpoints/auth/entities/user.entity";
-import { getDateTime } from "../utils/date.utils";
 
 export class Crud{
 
@@ -19,15 +19,12 @@ export class Crud{
         let data = null;
 
         try {
-            if(!paginationDto){
-                console.log('no pagination');
-                
+            if(!paginationDto){                
                 data = await this.anyRepository.find({
                   relations: this.relations,
                   where: { status: Status.Active }
                 });
             }else{
-                console.log('pagination');
                 const { limit = 10, offset = 0 } = paginationDto;
                 data = await this.anyRepository.find({
                     take: limit,
@@ -48,8 +45,7 @@ export class Crud{
 
         let data: any = [];
         
-        if ( isUUID(term) ) {
-            console.log(term);            
+        if ( isUUID(term) ) {      
             data = await this.anyRepository.findOneBy({ id: term });            
         }else{
             data = await this.anyRepository.find({
@@ -71,14 +67,11 @@ export class Crud{
             const dataCreate = this.anyRepository.create(create);
             dataCreate.created_by = user.id;
             files && (dataCreate.files = files.map(file => file.filename));
-            console.log(dataCreate);
             
             const dataSave = await this.anyRepository.save(dataCreate);
             
             return new ResponseAPI( 200, "Success", dataSave );  
-        } catch (error) {
-            console.log(error);
-            
+        } catch (error) {            
             this.handleDBExceptions(error);
         }
     }
@@ -115,8 +108,7 @@ export class Crud{
           }
 
           throw new NotFoundException(`Record cannot find by id ${id}`)
-        }catch(error){   
-            console.log(error);            
+        }catch(error){            
             this.handleDBExceptions(error); 
         }
     }

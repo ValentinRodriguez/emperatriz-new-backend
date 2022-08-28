@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ClientsService } from './clients.service';
-import { Clients } from './entities/client.entity';
-import { CreateClientDTO } from './dto/create-client.input';
-import { UpdateClientDTO } from './dto/update-client.input';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { ClientsService } from './clients.service';
+import { CreateClientDTO } from './dto/create-client.input';
+import { UpdateClientDTO } from './dto/update-client.input';
+import { Clients } from './entities/client.entity';
 
 @ApiTags('Clients')
 @Controller('clients')
@@ -38,8 +38,7 @@ export class ClientsController {
   updateClient(
     @Param('id', ParseUUIDPipe ) id: string,
     @Body() updateClientInput: UpdateClientDTO,
-    @GetUser() user: Users,) {
-    console.log(updateClientInput);    
+    @GetUser() user: Users,) {  
     return this.clientsService.update(updateClientInput.id, updateClientInput);
   }
 

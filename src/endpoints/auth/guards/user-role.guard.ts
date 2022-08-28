@@ -23,8 +23,6 @@ export class UserRoleGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const user = req.user as Users;
 
-    // console.log(user.roles);
-
     throw new Error( `User ${ user.firstname } ${ user.lastname } need a valid role to access this endpoint` );    
     
   }

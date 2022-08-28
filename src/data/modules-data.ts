@@ -6,7 +6,7 @@ export const modulesData: any[] = [
         label: 'Panel de control', 
         module: ValidRoles.CONTROL_PANEL,
         icon: 'pi pi-fw pi-cog',
-        programs: [
+        items: [
             { 
                 id: uuidv4(),
                 label: 'Gestion de usuarios', 
@@ -20,7 +20,7 @@ export const modulesData: any[] = [
     {
         label: 'Mi Negocio', icon: 'pi pi-fw pi-building',
         module: ValidRoles.MY_BUSINESS,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Mi empresa', icon: 'pi pi-fw pi-desktop', routerLink: 'programa/mi-negocio/mi-empresa' },
             { id: uuidv4(), label: 'Gestion de monedas', icon: 'pi pi-fw pi-desktop', routerLink: 'programa/mi-negocio/gestion-de-monedas' },
             { id: uuidv4(), label: 'Gestion de sucursales', descripcion: 'menu de gestion de la empresa', icon: 'pi pi-fw pi-desktop', routerLink : 'programa/mi-negocio/gestion-de-sucursales'},
@@ -29,7 +29,7 @@ export const modulesData: any[] = [
     {
         label: 'Inventario', icon: 'pi pi-fw pi-box',
         module: ValidRoles.INVENTORY,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Gestion de productos',descripcion: 'menu de inventario', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/inventario/gestion-de-productos'},
             { id: uuidv4(), label: 'Gestion de bodegas',descripcion: 'menu de inventario', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/inventario/gestion-de-bodegas'},
             { id: uuidv4(), label: 'Gestion de marcas',descripcion: 'menu de inventario', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/inventario/gestion-de-marcas'},
@@ -48,7 +48,7 @@ export const modulesData: any[] = [
     {
         label: 'Ventas', icon: 'pi pi-fw pi-chart-line',
         module: ValidRoles.SALES,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Interfaz de ventas',descripcion: 'modulo de ventas',icon: 'pi pi-fw pi-desktop', routerLink: 'pos-system'}, //
             // { id: uuidv4(), label: 'Generacion formulario 607',descripcion: 'Modulo ventas',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/ventas/generacion_formulario_607'},
             { id: uuidv4(), label: 'Ofertas y Promociones',descripcion: 'Modulo ventas',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/ventas/ofertas-promociones'},
@@ -62,7 +62,7 @@ export const modulesData: any[] = [
     {
         label: 'Compras', icon: 'pi pi-fw pi-shopping-bag',
         module: ValidRoles.SHOPPING,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Gestion de ordenes de compras', descripcion: 'menu de compras',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/compras/gestion-de-ordenes-compras'},
             { id: uuidv4(), label: 'Gestion de proveedores', descripcion: 'menu de compras',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/compras/gestion-de-proveedores'},
             { id: uuidv4(), label: 'Gestion de requisiciones', descripcion: 'menu de compras',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/compras/gestion-de-requisiciones'},                            
@@ -73,7 +73,7 @@ export const modulesData: any[] = [
     {
         label: 'Contabilidad General', icon: 'pi pi-fw pi-dollar',
         module: ValidRoles.GENERAL_ACCOUNTING,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Gestion del catalogo cuentas', descripcion: 'menu de contabilidad general', icon: 'pi pi-fw pi-desktop', routerLink: 'programa/contabilidad-general/gestion-catalogo-cuentas'},
     //         { id: uuidv4(), label: 'Diario General', descripcion: 'menu de contabilidad general', icon: 'pi pi-fw pi-file', routerLink: 'programa/contabilidad-general/reporte-diario-general'},
     //         { id: uuidv4(), label: 'periodo fiscales', descripcion: 'menu de contabilidad general', icon: 'pi pi-fw pi-desktop', routerLink: 'programa/contabilidad-general/gestion-periodos-fiscales'},
@@ -90,7 +90,7 @@ export const modulesData: any[] = [
     {
         label: 'Recursos Humanos', icon: 'pi pi-fw pi-users',
         module: ValidRoles.HUMAN_RESOURCES,
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Gestion de empleados', descripcion: 'Modulo RR.HH', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/recursos-humanos/gestion-de-empleados'},
             { id: uuidv4(), label: 'Gestion de puestos', descripcion: 'Modulo RR.HH', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/recursos-humanos/gestion-de-puestos'},
             { id: uuidv4(), label: 'Gestion de departamentos', descripcion: 'Modulo RR.HH', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/recursos-humanos/gestion-de-departamentos'},
@@ -103,7 +103,7 @@ export const modulesData: any[] = [
         label: 'Cuentas por Pagar', 
         module: ValidRoles.ACCOUNTS_TO_PAY,
         icon: 'pi pi-fw pi-percentage',
-        programs: [
+        items: [
             { id: uuidv4(), label: 'Analisis de Saldo', descripcion: 'Modulo Cuentas por pagar', icon: 'pi pi-fw pi-file',routerLink: 'programa/cuentas-por-pagar/reporte-analisis-saldo' },
             { id: uuidv4(), label: 'Facturas de proveedores', descripcion: 'Modulo Cuentas por pagar', icon: 'pi pi-fw pi-desktop',routerLink: 'programa/cuentas-por-pagar/gestion-factura-proveedores' }                            
         ]
@@ -112,13 +112,13 @@ export const modulesData: any[] = [
         label: 'Cuentas por Cobrar', 
         module: ValidRoles.ACCOUNTS_TO_RECEIVE,
         icon: 'pi pi-fw pi-money-bill',
-        programs: []
+        items: []
     },
     {
         label: 'Tienda Online', 
         icon: 'pi pi-fw pi-shopping-cart',
         module: ValidRoles.ONLINE_SHOP,
-        programs: [
+        items: [
            { id: uuidv4(), label: 'Creacion de productos tienda', descripcion: 'Modulo creacion de productos',icon: 'pi pi-fw pi-desktop', routerLink: 'programa/tienda-online/creacion-productos-plaza'}
 
         ]

@@ -34,8 +34,7 @@ export class InventoryTransactionsService {
 
   update(id:string, updateInventoryTransactionInput: UpdateInventoryTransactionDTO) {
     let data:InventoryTransactions = this.inventoryTransactionRepository.create(updateInventoryTransactionInput)
-    data.id = id;
-    console.log(data);    
+    data.id = id;   
     return this.inventoryTransactionRepository.save(data);    
   }
 

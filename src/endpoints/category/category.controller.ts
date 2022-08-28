@@ -1,12 +1,12 @@
-import { CategoryService } from './category.service';
-import { Category } from './entities/category.entity';
-import { CreateCategoryDTO } from './dto/create-category.input';
-import { UpdateCategoryDTO } from './dto/update-category.input';
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { GetUser } from '../auth/decorators';
 import { Users } from '../auth/entities/user.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { CategoryService } from './category.service';
+import { CreateCategoryDTO } from './dto/create-category.input';
+import { UpdateCategoryDTO } from './dto/update-category.input';
+import { Category } from './entities/category.entity';
 
 @ApiTags('Category')
 @Controller('category')
@@ -38,8 +38,7 @@ export class CategoryController {
     @Param('id', ParseUUIDPipe ) id: string, 
     @GetUser() user: Users,
     @Body() updateCategoryInput: UpdateCategoryDTO,
-  ) {
-    console.log(updateCategoryInput);    
+  ) {  
     return this.categoryService.updateRegister(id, updateCategoryInput,user);
   }
 

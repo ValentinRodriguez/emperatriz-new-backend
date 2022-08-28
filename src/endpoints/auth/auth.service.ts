@@ -58,18 +58,4 @@ export class AuthService extends Crud{
   private getJwtToken( payload: JwtPayload ) {
     return this.jwtService.sign( payload );  
   }
-
-  // async deleteAllData() {
-  //   const query = this.userRepository.createQueryBuilder('users');
-
-  //   try {
-  //     return await query
-  //       .delete()
-  //       .where({})
-  //       .execute();
-  //   } catch (error) {
-  //     this.handleDBExceptions(error);
-  //   }
-  // }
-
 }

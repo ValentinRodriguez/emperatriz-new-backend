@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Status } from '../../common/entity/entity';
 import { Repository } from 'typeorm';
+import { Status } from '../../common/entity/entity';
 import { CreateProviderDTO } from './dto/create-provider.input';
 import { UpdateProviderInput } from './dto/update-provider.input';
 import { Providers } from './entities/provider.entity';
@@ -35,8 +35,7 @@ export class ProviderService {
 
   update(id: string, updateProviderInput: UpdateProviderInput) {
     let data:Providers = this.providerRepository.create(updateProviderInput)
-    data.id = id;
-    console.log(data);    
+    data.id = id;   
     return this.providerRepository.save(data);  
   }
 

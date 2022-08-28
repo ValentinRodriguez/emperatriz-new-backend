@@ -28,17 +28,11 @@ export class MessagesWsGateway implements OnGatewayConnection, OnGatewayDisconne
       return;
     }
 
-    // console.log({ payload })    
-    // console.log('Cliente conectado:', client.id );
-    
-
     this.wss.emit('clients-updated', this.messagesWsService.getConnectedClients() );
   }
 
   handleDisconnect( client: Socket ) {
-    // console.log('Cliente desconectado', client.id )
     this.messagesWsService.removeClient( client.id );
-
     this.wss.emit('clients-updated', this.messagesWsService.getConnectedClients() );
   }
 

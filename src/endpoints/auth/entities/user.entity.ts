@@ -1,8 +1,9 @@
 import * as bcrypt from 'bcrypt';
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { IsArray } from 'class-validator';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { GlobalEntity } from '../../../common/entity/entity';
-import { RoleEntity } from '../../../endpoints/roles/entities/role.entity';
 import { Product } from '../../products/entities';
+import { IsGlobalString } from '../decorators';
 
 @Entity({ name: 'users' })
 export class Users extends GlobalEntity{
@@ -31,9 +32,10 @@ export class Users extends GlobalEntity{
     @Column('bool', { default: true })
     isAuthenticated:boolean;
 
-    @OneToOne(() => RoleEntity, (role) => role.user,{ eager: true, cascade: true }) 
-    @JoinColumn()
-    roles: RoleEntity
+    @IsGlobalString({ each: true })
+    @IsArray()
+    @Column('text', { array: true })
+    roles: string[];
 
     @OneToMany( () => Product, ( product ) => product.user )
     products: Product;

@@ -1,6 +1,6 @@
-import { IsEnum, IsIn, isIn, IsInt, IsString } from 'class-validator';
+import { IsEnum, IsIn, IsInt, IsString } from 'class-validator';
+import { Column, Generated } from 'typeorm';
 import { GlobalEntity } from '../../../common/entity/entity';
-import { BeforeInsert, Column, Generated, getConnection } from 'typeorm';
 import { YesNo } from '../../../utils/global-table-enum';
 
 export class CreatePurchaseOrderDTO extends GlobalEntity{
@@ -72,15 +72,15 @@ export class CreatePurchaseOrderDTO extends GlobalEntity{
 
   @IsString()
   @Column()
-  order_file: string; // archivo de la orden
+  order_file: string;
 
   @IsString()
   @Column()
-  order_observations: string;  // observaciones
+  order_observations: string; 
 
   @IsString()
   @Column()
-  formarray_order_products: string;  // array d
+  formarray_order_products: string; 
 
   // @BeforeInsert()
   // async beforeInsert() {
@@ -91,8 +91,7 @@ export class CreatePurchaseOrderDTO extends GlobalEntity{
 
   //   // get provider name
   //   const provider = await getConnection().getRepository(ProviderEntity).findOne(JSON.parse(this.order_providerId));
-  //   this.order_provider_name = provider.provider_name
-  //   console.log(this.formarray_order_products);
+  //   this.order_provider_name = provider.provider_name;
 
   //   products.forEach(product => {
   //     this.order_total_gross += product.order_gross_value;

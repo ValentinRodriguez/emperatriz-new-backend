@@ -1,13 +1,13 @@
 import { ValidRoles } from "../endpoints/auth/interfaces";
-import { Programs } from "../endpoints/modules/dto/create-module.dto";
+import { Items } from "../endpoints/modules/dto/create-module.dto";
 import { modulesData } from "./modules-data";
 
 const roles = modulesData;
 
 const result = roles.map(role => (
     {
-        module: { label: role.module, write: true, read: true },
-        programs: role.programs.map((program:Programs) => ({ 
+        label: { label: role.module, icon:role.icon,  write: true, read: true },
+        items: role.items.map((program:Items) => ({ 
             label: program.label,
             icon: program.icon,
             routerLink: program.routerLink, 
@@ -17,28 +17,22 @@ const result = roles.map(role => (
     }
 ))
 
+console.log('RESULT: ',result);
 const userRoles = [
     {
-        module: { label: ValidRoles.ADMIN, write: true, read: true },
-        programs: []
+        label: { label: ValidRoles.ADMIN, icon:'', write: true, read: true },
+        items: []
     },
     {
-        module: { label: ValidRoles.SUPER_ADMIN, write: true, read: true },
-        programs: []
+        label: { label: ValidRoles.SUPER_ADMIN, icon:'', write: true, read: true },
+        items: []
     },
     {
-        module: { label: ValidRoles.USER, write: true, read: true },
-        programs: []
+        label: { label: ValidRoles.USER, icon:'', write: true, read: true },
+        items: []
     },
 ]
 
-const resultUserRoles = result.concat(userRoles);
-console.log(resultUserRoles);
+export const resultUserRoles = result.concat(userRoles);
 
-export const RolesData: any[] = [
-    
-    {
-        roles: resultUserRoles
-    }        
-        
-]
+// export const RolesData: any[] = resultUserRoles

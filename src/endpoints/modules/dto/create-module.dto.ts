@@ -3,7 +3,7 @@ import { Column } from "typeorm";
 import { GlobalEntity } from "../../../common/entity/entity";
 import { IsGlobalString } from "../../../endpoints/auth/decorators";
 
-export interface Programs {
+export interface Items {
     id: string;
     label: string;
     icon: string;
@@ -23,5 +23,5 @@ export class CreateModuleDto extends GlobalEntity {
     @IsGlobalString()
     @IsArray()
     @Column('text', { array: true })
-    programs: Programs[];
+    items: Items[];
 }

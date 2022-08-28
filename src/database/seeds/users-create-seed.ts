@@ -1,8 +1,8 @@
 
+import { getManager } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { usersData } from '../../data/users-data';
 import { Users } from '../../endpoints/auth/entities/user.entity';
-import { getManager } from 'typeorm';
 
 const inputUsersData = usersData
 
