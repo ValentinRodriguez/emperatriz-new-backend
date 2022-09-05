@@ -134,9 +134,9 @@ export const columnData: CreateColumnInput[] = [
         columns: JSON.stringify(
             [
                 {field: "id", header: "ID", type: TypeColumn.Text },   
-                {field: "username", header: "Usuario", type: TypeColumn.Text },
-                {field: "user_email", header: "Email", type: TypeColumn.Text },
-                {field: "role", header: "Rol", type: TypeColumn.Text },
+                {field: "firstname", header: "Nombre", type: TypeColumn.Text },
+                {field: "lastname", header: "Apellido", type: TypeColumn.Text },
+                {field: "email", header: "Email", type: TypeColumn.Text },
                 {field: "actions", header: "Acciones", type: TypeColumn.Actions }
             ]
         )

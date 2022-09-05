@@ -17,7 +17,6 @@ const result = roles.map(role => (
     }
 ))
 
-console.log('RESULT: ',result);
 const userRoles = [
     {
         label: { label: ValidRoles.ADMIN, icon:'', write: true, read: true },

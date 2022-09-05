@@ -31,9 +31,10 @@ export enum StateToFilter {
     Warehouse = 'wareHouse.WareHouses',
     Movement = 'movement.Movements',
     PaymentsCondition = 'paymentCondition.PaymentsCondition',
-    User = 'user.Users',
+    User = 'users.Users',
     Currency = 'currency.Currencies',
     PurchaseOrder = 'purchaseOrder.PurchaseOrders',
+    Employee = 'employee.Employess'
 }
 
 export enum TypeColumn {

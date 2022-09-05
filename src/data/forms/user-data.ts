@@ -1,4 +1,4 @@
-import { TypeElement, UrlProgram } from "../../utils/global-table-enum";
+import { StateToFilter, TypeElement, UrlProgram } from "../../utils/global-table-enum";
 
 export const UserData:any = [
     {
@@ -12,20 +12,20 @@ export const UserData:any = [
         placeholder: "Seleccione empleado",
         suggestions: "dataToSohowOnAutoCompletes",        
         click: "filterOnAutoComplete",
-        stateToFilter: "employee.Employess",
+        stateToFilter: StateToFilter.Employee,
         validations: JSON.stringify( [{ required: true }]), 
         disabled: false, 
         field: "suggestion",
         class: "field col-12 md:col-3"
     },
     {
-        input_id: "user_email",
+        input_id: "email",
         typeElement: "text",
         type: TypeElement.input,
         form: UrlProgram.GestionDeUsuarios, 
         label: "Email",
-        formControlName: "user_email",
-        name: "user_email",
+        formControlName: "email",
+        name: "email",
         placeholder: "Email",
         validations: JSON.stringify( [{ required: true}]),
         disabled: false,
@@ -69,21 +69,6 @@ export const UserData:any = [
         validations: JSON.stringify( [{ required: true}]),
         disabled: false,
         class: "field col-12 md:col-3"
-    },
-    {
-        input_id: "user_role",
-        type: TypeElement.dropdown,
-        form: UrlProgram.GestionDeUsuarios, 
-        label: "moneda",
-        formControlName: "user_role",
-        name: "user_role",
-        placeholder: "Escoja Rol",
-        class: "field col-12 md:col-3",	
-        optionLabel: "name",
-        optionValue: "id",
-        options: "rols",
-        validations: JSON.stringify( [{ required: true}]), 
-        disabled: false,
     },
     {
         input_id: "user_image",
